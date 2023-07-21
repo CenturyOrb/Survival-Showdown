@@ -23,6 +23,9 @@ public enum InstanceManager {
      * @param survivalShowdown SurvivalShowdown plugin instance
      */
     public void start(final SurvivalShowdown survivalShowdown)   {
+
+        System.out.println("start()");
+
         assert survivalShowdown != null : "Error while starting Survival-Showdown";
         this.survivalShowdown = survivalShowdown;
 
@@ -36,12 +39,15 @@ public enum InstanceManager {
 
         // register plugin api
         mvCore = (MultiverseCore) Bukkit.getServer().getPluginManager().getPlugin("Multiverse-Core");
+        assert mvCore != null;
 
         // register managers
         configManager = new ConfigManager();
         mvWorldManager = mvCore.getMVWorldManager();
         lobbyManager = new LobbyManager();
         worldManager = new WorldManager();
+
+        System.out.println("register finished");
 
     }
 }
