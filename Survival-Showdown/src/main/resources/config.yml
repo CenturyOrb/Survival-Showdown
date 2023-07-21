@@ -30,8 +30,8 @@
   # ----------------------------------
   # Name format of the play worlds
   # the '#' represents the lobby's ID
-  lobby-format: 'Lobby_#'
-  arena-format: 'Arena_#'
+  lobby-format: 'Lobby_Copy_#'
+  arena-format: 'Arena_Copy_#'
 
   # ----------------------------------
   # Teleport Locations for Lobby

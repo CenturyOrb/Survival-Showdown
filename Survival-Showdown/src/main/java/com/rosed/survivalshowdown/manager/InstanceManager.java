@@ -33,10 +33,19 @@ public enum InstanceManager {
     }
 
     /**
+     *
+     */
+    public void end()   {
+
+        worldManager.unloadWorlds();
+        worldManager.deleteCopyWorlds();
+
+    }
+
+    /**
      * register managers, commands and events on startup
      */
-    private void register()   {
-
+    private void register() {
         // register plugin api
         mvCore = (MultiverseCore) Bukkit.getServer().getPluginManager().getPlugin("Multiverse-Core");
         assert mvCore != null;
@@ -48,6 +57,5 @@ public enum InstanceManager {
         worldManager = new WorldManager();
 
         System.out.println("register finished");
-
     }
 }

@@ -1,6 +1,5 @@
 package com.rosed.survivalshowdown.manager;
 
-import com.onarandombox.MultiverseCore.api.MVWorldManager;
 import com.rosed.survivalshowdown.SurvivalShowdown;
 import lombok.Getter;
 import org.bukkit.Bukkit;

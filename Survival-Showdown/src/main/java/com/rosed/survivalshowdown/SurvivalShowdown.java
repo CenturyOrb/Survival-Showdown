@@ -15,6 +15,8 @@ public final class SurvivalShowdown extends JavaPlugin {
     public void onDisable() {
         // Plugin shutdown logic
 
-        // unload cloned worlds
+        // unload worlds
+        InstanceManager.INSTANCE.end();
     }
+
 }
