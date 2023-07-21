@@ -13,9 +13,10 @@ public enum InstanceManager {
     private SurvivalShowdown survivalShowdown;
 
     private MultiverseCore mvCore;
-    private MVWorldManager mvWorldManager;
-
     private ConfigManager configManager;
+    private MVWorldManager mvWorldManager;
+    private WorldManager worldManager;
+    private LobbyManager lobbyManager;
 
     /**
      * set up server
@@ -39,5 +40,8 @@ public enum InstanceManager {
         // register managers
         configManager = new ConfigManager();
         mvWorldManager = mvCore.getMVWorldManager();
+        lobbyManager = new LobbyManager();
+        worldManager = new WorldManager();
+
     }
 }

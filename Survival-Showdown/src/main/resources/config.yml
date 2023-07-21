@@ -33,4 +33,27 @@
   lobby-format: 'Lobby_#'
   arena-format: 'Arena_#'
 
+  # ----------------------------------
+  # Teleport Locations for Lobby
+  lobby-location:
+    x: 8
+    y: -60
+    z: 8
+    pitch: 0
+    yaw: 0
 
+  # ----------------------------------
+  # Teleport Locations for Lobby
+  arena-location:
+    player1:
+      x: 8
+      y: -45
+      z: -15
+      pitch: 0
+      yaw: 0
+    player2:
+      x: 8
+      y: -45
+      z: 31
+      pitch: 0
+      yaw: 0
