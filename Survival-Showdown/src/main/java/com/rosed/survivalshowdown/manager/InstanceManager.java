@@ -25,12 +25,11 @@ public enum InstanceManager {
      */
     public void start(final SurvivalShowdown survivalShowdown)   {
 
-        System.out.println("start()");
-
         assert survivalShowdown != null : "Error while starting Survival-Showdown";
         this.survivalShowdown = survivalShowdown;
 
         register();
+
     }
 
     /**
@@ -58,7 +57,5 @@ public enum InstanceManager {
         lobbyManager = new LobbyManager();
         gameManager = new GameManager();
 
-
-        System.out.println("register finished");
     }
 }

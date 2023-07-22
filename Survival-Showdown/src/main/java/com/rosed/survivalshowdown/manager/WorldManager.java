@@ -15,10 +15,7 @@ public class WorldManager {
         configManager = InstanceManager.INSTANCE.getConfigManager();
         mvWorldManager = InstanceManager.INSTANCE.getMvWorldManager();
 
-        System.out.println("Finished initializing managers in WorldManager");
-
         // clone the worlds
-        System.out.println("test");
         loadExampleWorlds();
         cloneLobbyWorlds(configManager.getNumLobby());
         cloneArenaWorlds(configManager.getNumLobby());
@@ -77,10 +74,6 @@ public class WorldManager {
         for (int i = 0; i < lobbyNum; i++)   {
             mvWorldManager.cloneWorld(configManager.getLobbyExampleName(), getLobbyWorldName(i));
         }
-
-        System.out.println("Finished cloneLobbyWorld()");
-        System.out.println("Bukkit#getWorlds(): " + Bukkit.getServer().getWorlds());
-        System.out.println("MultiCore#getWorlds(): " + mvWorldManager.getMVWorlds());
 
     }
 
