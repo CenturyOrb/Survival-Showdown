@@ -17,6 +17,7 @@ public enum InstanceManager {
     private MVWorldManager mvWorldManager;
     private WorldManager worldManager;
     private LobbyManager lobbyManager;
+    private GameManager gameManager;
 
     /**
      * set up server
@@ -24,12 +25,11 @@ public enum InstanceManager {
      */
     public void start(final SurvivalShowdown survivalShowdown)   {
 
-        System.out.println("start()");
-
         assert survivalShowdown != null : "Error while starting Survival-Showdown";
         this.survivalShowdown = survivalShowdown;
 
         register();
+
     }
 
     /**
@@ -53,9 +53,9 @@ public enum InstanceManager {
         // register managers
         configManager = new ConfigManager();
         mvWorldManager = mvCore.getMVWorldManager();
-        lobbyManager = new LobbyManager();
         worldManager = new WorldManager();
+        lobbyManager = new LobbyManager();
+        gameManager = new GameManager();
 
-        System.out.println("register finished");
     }
 }

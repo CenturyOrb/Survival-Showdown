@@ -20,7 +20,7 @@ public class ConfigManager {
         survivalShowdown = InstanceManager.INSTANCE.getSurvivalShowdown();
 
         setUpConfig();
-        getConfigData();
+        setConfigData();
 
     }
 
@@ -39,7 +39,7 @@ public class ConfigManager {
     /**
      * initializes variables with config values
      */
-    private void getConfigData()   {
+    private void setConfigData()   {
 
         numLobby = config.getInt("num-lobby");
 
