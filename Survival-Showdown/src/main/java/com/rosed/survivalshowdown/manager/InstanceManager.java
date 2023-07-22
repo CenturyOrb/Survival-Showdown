@@ -53,8 +53,8 @@ public enum InstanceManager {
         // register managers
         configManager = new ConfigManager();
         mvWorldManager = mvCore.getMVWorldManager();
-        lobbyManager = new LobbyManager();
         worldManager = new WorldManager();
+        lobbyManager = new LobbyManager();
 
         System.out.println("register finished");
     }

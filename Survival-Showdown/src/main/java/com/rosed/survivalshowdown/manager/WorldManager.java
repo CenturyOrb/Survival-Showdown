@@ -37,7 +37,7 @@ public class WorldManager {
     }
 
     /**
-     * should unload all worlds
+     * unloads example lobby and arena worlds
      */
     public void unloadWorlds()   {
 
@@ -46,6 +46,9 @@ public class WorldManager {
 
     }
 
+    /**
+     * deletes arena and lobby copy worlds
+     */
     public void deleteCopyWorlds()   {
 
         for (MultiverseWorld mvWorld : mvWorldManager.getMVWorlds())   {
@@ -67,7 +70,7 @@ public class WorldManager {
     private void cloneLobbyWorlds(int lobbyNum)   {
 
         for (int i = 0; i < lobbyNum; i++)   {
-            mvWorldManager.cloneWorld(configManager.getLobbyExampleName(), getLobbyName(i));
+            mvWorldManager.cloneWorld(configManager.getLobbyExampleName(), getLobbyWorldName(i));
         }
 
         System.out.println("Finished cloneLobbyWorld()");
@@ -76,10 +79,14 @@ public class WorldManager {
 
     }
 
+    /**
+     * clones arena worlds with name from config
+     * @param lobbyNum number of arena worlds
+     */
     private void cloneArenaWorlds(int lobbyNum)   {
 
         for (int i = 0; i < lobbyNum; i++)   {
-            mvWorldManager.cloneWorld(configManager.getArenaExampleName(), getArenaName(i));
+            mvWorldManager.cloneWorld(configManager.getArenaExampleName(), getArenaWorldName(i));
         }
 
     }
@@ -89,7 +96,7 @@ public class WorldManager {
      * @param lobbyID lobby ID
      * @return return lobby world name
      */
-    public String getLobbyName(int lobbyID)   {
+    public String getLobbyWorldName(int lobbyID)   {
 
         return configManager.getLobbyFormat().replace("#", String.valueOf(lobbyID));
 
@@ -100,7 +107,7 @@ public class WorldManager {
      * @param lobbyID lobby ID
      * @return return arena world name
      */
-    public String getArenaName(int lobbyID)   {
+    public String getArenaWorldName(int lobbyID)   {
 
         return configManager.getArenaFormat().replace("#", String.valueOf(lobbyID));
 
