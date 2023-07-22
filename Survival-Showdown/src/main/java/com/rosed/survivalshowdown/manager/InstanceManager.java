@@ -17,6 +17,7 @@ public enum InstanceManager {
     private MVWorldManager mvWorldManager;
     private WorldManager worldManager;
     private LobbyManager lobbyManager;
+    private GameManager gameManager;
 
     /**
      * set up server
@@ -55,6 +56,8 @@ public enum InstanceManager {
         mvWorldManager = mvCore.getMVWorldManager();
         worldManager = new WorldManager();
         lobbyManager = new LobbyManager();
+        gameManager = new GameManager();
+
 
         System.out.println("register finished");
     }

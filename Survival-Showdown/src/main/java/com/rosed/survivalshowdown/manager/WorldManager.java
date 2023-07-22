@@ -7,8 +7,8 @@ import org.bukkit.World;
 
 public class WorldManager {
 
-    private ConfigManager configManager;
-    private MVWorldManager mvWorldManager;
+    private final ConfigManager configManager;
+    private final MVWorldManager mvWorldManager;
 
     public WorldManager()   {
 
@@ -31,8 +31,13 @@ public class WorldManager {
      */
     private void loadExampleWorlds()   {
 
-        Object lobbyExampleLoaded = mvWorldManager.isMVWorld(Bukkit.getWorld(configManager.getLobbyExampleName())) ? null : mvWorldManager.addWorld(configManager.getLobbyExampleName(), World.Environment.valueOf("NORMAL"), null, null, null, "NORMAL", false);
-        Object arenaExampleLoaded = mvWorldManager.isMVWorld(Bukkit.getWorld(configManager.getArenaExampleName())) ? null : mvWorldManager.addWorld(configManager.getArenaExampleName(), World.Environment.valueOf("NORMAL"), null, null, null, "NORMAL", false);
+        if (!mvWorldManager.isMVWorld(Bukkit.getWorld(configManager.getLobbyExampleName())))   {
+            mvWorldManager.addWorld(configManager.getLobbyExampleName(), World.Environment.valueOf("NORMAL"), null, null, null, "NORMAL", false);
+        }
+
+        if (!mvWorldManager.isMVWorld(Bukkit.getWorld(configManager.getArenaExampleName())))   {
+            mvWorldManager.addWorld(configManager.getArenaExampleName(), World.Environment.valueOf("NORMAL"), null, null, null, "NORMAL", false);
+        }
 
     }
 
