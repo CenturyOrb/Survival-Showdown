@@ -6,7 +6,6 @@ import com.rosed.survivalshowdown.manager.WorldManager;
 import lombok.Getter;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
-
 import java.util.ArrayList;
 import java.util.List;
 

@@ -3,3 +3,6 @@ version: '1.0-SNAPSHOT'
 main: com.rosed.survivalshowdown.SurvivalShowdown
 api-version: '1.19'
 softdepend: ['Multiverse-Core']
+commands:
+  lobby:
+  worldinfo:

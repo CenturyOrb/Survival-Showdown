@@ -3,7 +3,6 @@ package com.rosed.survivalshowdown.manager;
 import com.rosed.survivalshowdown.instance.Lobby;
 import lombok.Getter;
 import org.bukkit.entity.Player;
-
 import java.util.ArrayList;
 import java.util.List;
 
