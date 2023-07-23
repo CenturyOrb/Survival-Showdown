@@ -3,3 +3,6 @@ version: '${project.version}'
 main: com.rosed.survivalshowdown.SurvivalShowdown
 api-version: '1.19'
 softdepend: ['Multiverse-Core']
+commands:
+  lobby:
+  worldinfo:

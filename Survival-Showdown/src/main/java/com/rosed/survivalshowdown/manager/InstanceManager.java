@@ -3,6 +3,8 @@ package com.rosed.survivalshowdown.manager;
 import com.onarandombox.MultiverseCore.MultiverseCore;
 import com.onarandombox.MultiverseCore.api.MVWorldManager;
 import com.rosed.survivalshowdown.SurvivalShowdown;
+import com.rosed.survivalshowdown.command.LobbyCommand;
+import com.rosed.survivalshowdown.command.WorldInfoCommand;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 
@@ -46,6 +48,7 @@ public enum InstanceManager {
      * register managers, commands and events on startup
      */
     private void register() {
+
         // register plugin api
         mvCore = (MultiverseCore) Bukkit.getServer().getPluginManager().getPlugin("Multiverse-Core");
         assert mvCore != null;
@@ -56,6 +59,10 @@ public enum InstanceManager {
         worldManager = new WorldManager();
         lobbyManager = new LobbyManager();
         gameManager = new GameManager();
+
+        // register commands
+        survivalShowdown.getCommand("lobby").setExecutor(new LobbyCommand());
+        survivalShowdown.getCommand("worldinfo").setExecutor(new WorldInfoCommand());
 
     }
 }

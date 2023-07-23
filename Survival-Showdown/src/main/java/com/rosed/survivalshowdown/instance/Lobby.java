@@ -6,7 +6,6 @@ import com.rosed.survivalshowdown.manager.WorldManager;
 import lombok.Getter;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +18,7 @@ public class Lobby {
     private final int lobbyID;
     private List<Player> playerList;
     private Location lobbyLocation;
+    private Game game;
 
     public Lobby(int lobbyID)   {
 
@@ -28,8 +28,23 @@ public class Lobby {
         this.lobbyID = lobbyID;
         playerList = new ArrayList<>();
         setLobbyLocation();
+        game = new Game(lobbyID);
 
         System.out.println("Lobby: " + lobbyID + " is loaded");
+    }
+
+    public void addPlayerToLobby(Player player)   {
+
+        playerList.add(player);
+        player.teleport(lobbyLocation);
+
+    }
+
+    public void removePlayerFromLobby(Player player)   {
+
+        playerList.remove(player);
+        player.teleport(configManager.getLocation("hub", configManager.getConfig().getString("hub.world")));
+
     }
 
     /**

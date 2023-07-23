@@ -20,18 +20,6 @@ public class GameManager {
 
         gameList = new ArrayList<>();
 
-        createGames();
-    }
-
-    /**
-     * create game instances
-     */
-    private void createGames()   {
-
-        for (int i = 0; i < configManager.getNumLobby(); i++)   {
-            gameList.add(new Game(i));
-        }
-
     }
 
     /**
