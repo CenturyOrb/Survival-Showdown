@@ -1,6 +1,7 @@
 package com.rosed.survivalshowdown.instance;
 
 import com.rosed.survivalshowdown.manager.ConfigManager;
+import com.rosed.survivalshowdown.manager.CraftManager;
 import com.rosed.survivalshowdown.manager.InstanceManager;
 import com.rosed.survivalshowdown.manager.WorldManager;
 import lombok.Getter;
@@ -14,6 +15,7 @@ public class Lobby {
 
     private final ConfigManager configManager;
     private final WorldManager worldManager;
+    private CraftManager craftManager;
 
     private final int lobbyID;
     private List<Player> playerList;
@@ -24,6 +26,7 @@ public class Lobby {
 
         configManager = InstanceManager.INSTANCE.getConfigManager();
         worldManager = InstanceManager.INSTANCE.getWorldManager();
+        craftManager = InstanceManager.INSTANCE.getCraftManager();
 
         this.lobbyID = lobbyID;
         playerList = new ArrayList<>();
@@ -36,6 +39,7 @@ public class Lobby {
     public void addPlayerToLobby(Player player)   {
 
         playerList.add(player);
+        craftManager.getCraftableMap().put(player, craftManager.getCraftablePreset());
         player.teleport(lobbyLocation);
 
     }
@@ -43,6 +47,7 @@ public class Lobby {
     public void removePlayerFromLobby(Player player)   {
 
         playerList.remove(player);
+        craftManager.getCraftableMap().remove(player);
         player.teleport(configManager.getLocation("hub", configManager.getConfig().getString("hub.world")));
 
     }

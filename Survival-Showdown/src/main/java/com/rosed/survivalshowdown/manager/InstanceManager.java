@@ -5,6 +5,7 @@ import com.onarandombox.MultiverseCore.api.MVWorldManager;
 import com.rosed.survivalshowdown.SurvivalShowdown;
 import com.rosed.survivalshowdown.command.LobbyCommand;
 import com.rosed.survivalshowdown.command.WorldInfoCommand;
+import com.rosed.survivalshowdown.listener.PlayerCraftEvent;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 
@@ -20,6 +21,7 @@ public enum InstanceManager {
     private WorldManager worldManager;
     private LobbyManager lobbyManager;
     private GameManager gameManager;
+    private CraftManager craftManager;
 
     /**
      * set up server
@@ -57,12 +59,16 @@ public enum InstanceManager {
         configManager = new ConfigManager();
         mvWorldManager = mvCore.getMVWorldManager();
         worldManager = new WorldManager();
+        craftManager = new CraftManager();
         lobbyManager = new LobbyManager();
         gameManager = new GameManager();
 
         // register commands
         survivalShowdown.getCommand("lobby").setExecutor(new LobbyCommand());
         survivalShowdown.getCommand("worldinfo").setExecutor(new WorldInfoCommand());
+
+        // register events
+        Bukkit.getPluginManager().registerEvents(new PlayerCraftEvent(), survivalShowdown);
 
     }
 }
