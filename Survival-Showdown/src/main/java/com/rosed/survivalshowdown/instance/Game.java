@@ -4,8 +4,10 @@ import com.rosed.survivalshowdown.manager.ConfigManager;
 import com.rosed.survivalshowdown.manager.InstanceManager;
 import com.rosed.survivalshowdown.manager.WorldManager;
 import lombok.Getter;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,23 +17,42 @@ public class Game {
     private final ConfigManager configManager;
     private final WorldManager worldManager;
 
+    private final Lobby lobby;
     private final int gameID;
     private GameState gameState;
     private List<Player> playerList;
     private Location player1ArenaLocation, player2ArenaLocation;
 
-    public Game(int gameID)   {
+    public Game(Lobby lobby)   {
 
         configManager = InstanceManager.INSTANCE.getConfigManager();
         worldManager = InstanceManager.INSTANCE.getWorldManager();
 
-        this.gameID = gameID;
+        this.lobby = lobby;
+        this.gameID = lobby.getLobbyID();
         gameState = GameState.RECRUITING;
         playerList = new ArrayList<>();
 
         setPlayerArenaLocations();
 
         System.out.println("Game: " + gameID + " is loaded");
+
+    }
+
+    public void start()   {
+
+        playerList = lobby.getPlayerList();
+
+        // teleport players to rightful worlds
+
+        gameState = GameState.LIVE;
+        lobby.sendMessage(ChatColor.translateAlternateColorCodes('&', "&a&l-----------------------------------------------"));
+        lobby.sendMessage(ChatColor.translateAlternateColorCodes('&', "&l                     Survival Showdown         "));
+        lobby.sendMessage("");
+        lobby.sendMessage(ChatColor.translateAlternateColorCodes('&', "&e                  Gather resources to prepare  "));
+        lobby.sendMessage(ChatColor.translateAlternateColorCodes('&', "&e                  for the fight. First to 3 wins"));
+        lobby.sendMessage("");
+        lobby.sendMessage(ChatColor.translateAlternateColorCodes('&', "&a&l-----------------------------------------------"));
 
     }
 
@@ -45,6 +66,16 @@ public class Game {
 
     }
 
+    /**
+     * sets game state
+     * @param gameState GameState
+     */
     public void setGameState(GameState gameState)   { this.gameState = gameState; }
+
+    public void setPlayerList(List<Player> playerList)   {
+
+        this.playerList = playerList;
+
+    }
 
 }

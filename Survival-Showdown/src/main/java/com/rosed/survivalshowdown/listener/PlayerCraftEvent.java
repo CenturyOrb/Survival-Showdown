@@ -82,18 +82,12 @@ public class PlayerCraftEvent implements Listener {
             e.setCancelled(true);
 
         } else {
-
             if (craftManager.isCraftable(item))   {
-
                 if (!craftManager.updatePlayerCraftable(player, item, recipeAmount))   {
-
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c(&l&6!&c) You can't craft more " + item.getItemMeta().getDisplayName()));
                     e.setCancelled(true);
-
                 }
-
             }
-
         }
 
     }

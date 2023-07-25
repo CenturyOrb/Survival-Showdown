@@ -13,8 +13,8 @@ public class ConfigManager {
     private FileConfiguration config;
 
     private int numLobby;
-
     private String lobbyExampleName, lobbyFormat, arenaExampleName, arenaFormat;
+    private int lobbyCountdown;
 
     public ConfigManager()   {
         survivalShowdown = InstanceManager.INSTANCE.getSurvivalShowdown();
@@ -47,6 +47,7 @@ public class ConfigManager {
         lobbyFormat = config.getString("lobby-format");
         arenaExampleName = config.getString("arena-example-name");
         arenaFormat = config.getString("arena-format");
+        lobbyCountdown = config.getInt("countdown.lobby");
 
     }
 

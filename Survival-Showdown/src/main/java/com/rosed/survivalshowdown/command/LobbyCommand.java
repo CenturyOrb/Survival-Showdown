@@ -58,9 +58,16 @@ public class LobbyCommand implements CommandExecutor {
                 if (lobbyManager.getPlayerLobby(player) == null) {
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c(&l&6!&c) You are not in a lobby!"));
                 } else {
+
                     int lobbyID = lobbyManager.getPlayerLobby(player).getLobbyID();
-                    lobbyManager.getLobbyList().get(lobbyManager.getPlayerLobby(player).getLobbyID()).removePlayerFromLobby(player);
-                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&aYou have left &6lobby" + lobbyID));
+
+                    if (lobbyManager.getPlayerLobby(player).getGame().getGameState().equals(GameState.COUNTDOWN))   {
+                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c(&l&6!&c) You can not leave during countdown!"));
+                    } else {
+                        lobbyManager.getLobbyList().get(lobbyManager.getPlayerLobby(player).getLobbyID()).removePlayerFromLobby(player);
+                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&aYou have left &6lobby" + lobbyID));
+                    }
+
                 }
 
             } else {

@@ -21,7 +21,6 @@
     pitch: 0
     yaw: 0
 
-
   # ----------------------------------
   # Name of the Example worlds
   lobby-example-name: 'Lobby_Example'
@@ -57,3 +56,8 @@
       z: 31
       pitch: 0
       yaw: 0
+
+  # ----------------------------------
+  # Countdowns in seconds
+  countdown:
+    lobby: 20

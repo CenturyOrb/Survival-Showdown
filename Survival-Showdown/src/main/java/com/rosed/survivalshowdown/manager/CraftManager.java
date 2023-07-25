@@ -86,6 +86,9 @@ public class CraftManager {
 
     }
 
+    /**
+     * sets up custom item ItemStacks
+     */
     private void setUpBudgetGapRecipe()   {
 
         budgetGap = new ItemStack(Material.GOLDEN_APPLE);
