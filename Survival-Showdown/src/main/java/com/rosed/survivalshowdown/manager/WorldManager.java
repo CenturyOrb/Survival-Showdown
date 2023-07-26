@@ -3,7 +3,11 @@ package com.rosed.survivalshowdown.manager;
 import com.onarandombox.MultiverseCore.api.MVWorldManager;
 import com.onarandombox.MultiverseCore.api.MultiverseWorld;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.World;
+import org.bukkit.WorldType;
+
+import java.util.concurrent.ThreadLocalRandom;
 
 public class WorldManager {
 
@@ -86,6 +90,23 @@ public class WorldManager {
         for (int i = 0; i < lobbyNum; i++)   {
             mvWorldManager.cloneWorld(configManager.getArenaExampleName(), getArenaWorldName(i));
         }
+
+    }
+
+    public void createLiveWorlds(int lobbyID)   {
+
+        ThreadLocalRandom random = ThreadLocalRandom.current();
+        long number = random.nextLong();
+        String stringSeed = number + "";
+
+        mvWorldManager.addWorld("World_Overworld_" +  lobbyID , World.Environment.NORMAL, stringSeed, WorldType.NORMAL, true, "Multiverse-Core");
+        Bukkit.broadcastMessage(ChatColor.GREEN + "Created Overworld");
+
+        mvWorldManager.addWorld("World_Nether_" +  lobbyID , World.Environment.NETHER, stringSeed, WorldType.NORMAL, true, "Multiverse-Core");
+        Bukkit.broadcastMessage(ChatColor.GREEN + "Created NETHER");
+
+        mvWorldManager.addWorld("World_End_" +  lobbyID , World.Environment.THE_END, stringSeed, WorldType.NORMAL, true, "Multiverse-Core");
+        Bukkit.broadcastMessage(ChatColor.GREEN + "Created END");
 
     }
 
