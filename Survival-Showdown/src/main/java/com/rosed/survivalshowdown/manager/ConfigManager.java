@@ -13,7 +13,9 @@ public class ConfigManager {
     private FileConfiguration config;
 
     private int numLobby;
-    private String lobbyExampleName, lobbyFormat, arenaExampleName, arenaFormat;
+    private String lobbyExampleName, lobbyFormat,
+                    arenaExampleName, arenaFormat,
+                    liveOverworldFormat, liveNetherFormat, liveEndFormat;
     private int lobbyCountdown;
 
     public ConfigManager()   {
@@ -48,6 +50,9 @@ public class ConfigManager {
         arenaExampleName = config.getString("arena-example-name");
         arenaFormat = config.getString("arena-format");
         lobbyCountdown = config.getInt("countdown.lobby");
+        liveOverworldFormat = config.getString("live-format.overworld-format");
+        liveNetherFormat = config.getString("live-format.nether-format");
+        liveEndFormat = config.getString("live-format.end-format");
 
     }
 

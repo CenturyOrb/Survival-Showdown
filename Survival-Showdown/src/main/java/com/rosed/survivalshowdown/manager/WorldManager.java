@@ -69,6 +69,24 @@ public class WorldManager {
 
     }
 
+    public void deleteLiveWorlds()   {
+
+        for (MultiverseWorld mvWorld : mvWorldManager.getMVWorlds())   {
+            String worldName = mvWorld.getName();
+
+            String overworldFormat = configManager.getLiveOverworldFormat().replace("#", "");
+            String netherFormat = configManager.getLiveNetherFormat().replace("#", "");
+            String endFormat = configManager.getLiveEndFormat().replace("#", "");
+
+            if (worldName.contains(overworldFormat) ||
+                worldName.contains(netherFormat) ||
+                worldName.contains(endFormat))   {
+                mvWorldManager.deleteWorld(worldName, true, true);
+            }
+        }
+
+    }
+
     /**
      * clones lobby worlds with name from config
      * @param lobbyNum number of lobby worlds

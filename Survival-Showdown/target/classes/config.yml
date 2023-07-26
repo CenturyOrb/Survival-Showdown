@@ -33,6 +33,14 @@
   arena-format: 'Arena_Copy_#'
 
   # ----------------------------------
+  # Name format of the live worlds
+  # the '#' represents the lobby's ID
+  live-format:
+    overworld-format: 'Live_Overworld_#'
+    nether-format: 'Live_Nether_#'
+    end-format: 'Live_End_#'
+
+  # ----------------------------------
   # Teleport Locations for Lobby
   lobby-location:
     x: 8

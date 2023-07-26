@@ -44,6 +44,7 @@ public enum InstanceManager {
 
         worldManager.unloadWorlds();
         worldManager.deleteCopyWorlds();
+        worldManager.deleteLiveWorlds();
 
     }
 
