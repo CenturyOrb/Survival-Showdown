@@ -78,6 +78,7 @@ public class WorldManager {
         for (int i = 0; i < lobbyNum; i++)   {
             mvWorldManager.cloneWorld(configManager.getLobbyExampleName(), getLobbyWorldName(i));
         }
+        mvWorldManager.unloadWorld(configManager.getLobbyExampleName());
 
     }
 
@@ -90,6 +91,7 @@ public class WorldManager {
         for (int i = 0; i < lobbyNum; i++)   {
             mvWorldManager.cloneWorld(configManager.getArenaExampleName(), getArenaWorldName(i));
         }
+        mvWorldManager.unloadWorld(configManager.getArenaExampleName());
 
     }
 
