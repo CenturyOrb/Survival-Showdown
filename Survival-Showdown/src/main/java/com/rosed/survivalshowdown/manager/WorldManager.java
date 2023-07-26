@@ -1,29 +1,40 @@
 package com.rosed.survivalshowdown.manager;
 
+import com.onarandombox.MultiverseCore.MVWorld;
 import com.onarandombox.MultiverseCore.api.MVWorldManager;
 import com.onarandombox.MultiverseCore.api.MultiverseWorld;
+import com.rosed.survivalshowdown.instance.Lobby;
+import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.WorldType;
+import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
+@Getter
 public class WorldManager {
 
     private final ConfigManager configManager;
     private final MVWorldManager mvWorldManager;
+
+    private HashMap<Player, List<MultiverseWorld>> livePlayerWorldMap;
 
     public WorldManager()   {
 
         configManager = InstanceManager.INSTANCE.getConfigManager();
         mvWorldManager = InstanceManager.INSTANCE.getMvWorldManager();
 
+        livePlayerWorldMap = new HashMap<>();
+
         // clone the worlds
         loadExampleWorlds();
         cloneLobbyWorlds(configManager.getNumLobby());
         cloneArenaWorlds(configManager.getNumLobby());
-
 
     }
 
@@ -58,17 +69,18 @@ public class WorldManager {
     public void deleteCopyWorlds()   {
 
         for (MultiverseWorld mvWorld : mvWorldManager.getMVWorlds())   {
-
             String worldName = mvWorld.getName();
 
             if (worldName.contains("Copy"))   {
                 mvWorldManager.deleteWorld(worldName);
             }
-
         }
 
     }
 
+    /**
+     * deletes all live worlds
+     */
     public void deleteLiveWorlds()   {
 
         for (MultiverseWorld mvWorld : mvWorldManager.getMVWorlds())   {
@@ -113,21 +125,40 @@ public class WorldManager {
 
     }
 
-    public void createLiveWorlds(int lobbyID)   {
+    /**
+     * creates overworld, nether, end worlds for game
+     * @param lobbyID lobby id
+     */
+    public void createLiveWorlds(Lobby lobby, int lobbyID)   {
 
         ThreadLocalRandom random = ThreadLocalRandom.current();
         long number = random.nextLong();
         String stringSeed = number + "";
+        String p1End = "P1_" + lobbyID;
+        String p2End = "P2_" + lobbyID;
 
-        mvWorldManager.addWorld("World_Overworld_" +  lobbyID , World.Environment.NORMAL, stringSeed, WorldType.NORMAL, true, "Multiverse-Core");
-        Bukkit.broadcastMessage(ChatColor.GREEN + "Created Overworld");
+        Player p1 = lobby.getPlayerList().get(0);
+        Player p2 = lobby.getPlayerList().get(1);
 
-        mvWorldManager.addWorld("World_Nether_" +  lobbyID , World.Environment.NETHER, stringSeed, WorldType.NORMAL, true, "Multiverse-Core");
-        Bukkit.broadcastMessage(ChatColor.GREEN + "Created NETHER");
+        createPlayerLiveWorlds(p1, stringSeed, p1End);
+        createPlayerLiveWorlds(p2, stringSeed, p2End);
 
-        mvWorldManager.addWorld("World_End_" +  lobbyID , World.Environment.THE_END, stringSeed, WorldType.NORMAL, true, "Multiverse-Core");
-        Bukkit.broadcastMessage(ChatColor.GREEN + "Created END");
+    }
 
+    private void createPlayerLiveWorlds(Player player, String stringSeed, String playerEnd) {
+
+        List<MultiverseWorld> playerMVLiveWorld = new ArrayList<>();
+
+        mvWorldManager.addWorld(configManager.getLiveOverworldFormat().replace("#", playerEnd), World.Environment.NORMAL, stringSeed, WorldType.NORMAL, true, "Multiverse-Core");
+        playerMVLiveWorld.add(mvWorldManager.getMVWorld(configManager.getLiveOverworldFormat().replace("#", playerEnd)));
+
+        mvWorldManager.addWorld(configManager.getLiveNetherFormat().replace("#", playerEnd), World.Environment.NETHER, stringSeed, WorldType.NORMAL, true, "Multiverse-Core");
+        playerMVLiveWorld.add(mvWorldManager.getMVWorld(configManager.getLiveNetherFormat().replace("#", playerEnd)));
+
+        mvWorldManager.addWorld(configManager.getLiveEndFormat().replace("#", playerEnd), World.Environment.THE_END, stringSeed, WorldType.NORMAL, true, "Multiverse-Core");
+        playerMVLiveWorld.add(mvWorldManager.getMVWorld(configManager.getLiveEndFormat().replace("#", playerEnd)));
+
+        livePlayerWorldMap.put(player, playerMVLiveWorld);
     }
 
     /**

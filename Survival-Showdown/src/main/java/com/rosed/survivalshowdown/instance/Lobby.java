@@ -103,7 +103,7 @@ public class Lobby {
 
     public void start()   {
 
-        worldManager.createLiveWorlds(lobbyID);
+        worldManager.createLiveWorlds(this, lobbyID);
         lobbyCountdown.start();
         game.setGameState(GameState.COUNTDOWN);
 

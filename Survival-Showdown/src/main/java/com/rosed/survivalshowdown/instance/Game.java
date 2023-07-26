@@ -1,11 +1,13 @@
 package com.rosed.survivalshowdown.instance;
 
+import com.onarandombox.MultiverseCore.api.MultiverseWorld;
 import com.rosed.survivalshowdown.manager.ConfigManager;
 import com.rosed.survivalshowdown.manager.InstanceManager;
 import com.rosed.survivalshowdown.manager.WorldManager;
 import lombok.Getter;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -44,6 +46,12 @@ public class Game {
         playerList = lobby.getPlayerList();
 
         // teleport players to rightful worlds
+        for (Player player : playerList)   {
+            if (worldManager.getLivePlayerWorldMap().get(player) != null)   {
+                MultiverseWorld mvWorld = worldManager.getLivePlayerWorldMap().get(player).get(0);
+                player.teleport(mvWorld.getSpawnLocation());
+            }
+        }
 
         gameState = GameState.LIVE;
         lobby.sendMessage(ChatColor.translateAlternateColorCodes('&', "&a&l-----------------------------------------------"));
