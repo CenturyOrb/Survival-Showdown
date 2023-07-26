@@ -6,3 +6,4 @@ softdepend: ['Multiverse-Core']
 commands:
   lobby:
   worldinfo:
+  createworld:

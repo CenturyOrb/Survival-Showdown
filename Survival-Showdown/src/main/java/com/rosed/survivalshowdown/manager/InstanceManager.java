@@ -3,6 +3,7 @@ package com.rosed.survivalshowdown.manager;
 import com.onarandombox.MultiverseCore.MultiverseCore;
 import com.onarandombox.MultiverseCore.api.MVWorldManager;
 import com.rosed.survivalshowdown.SurvivalShowdown;
+import com.rosed.survivalshowdown.command.CreateWorldCommand;
 import com.rosed.survivalshowdown.command.LobbyCommand;
 import com.rosed.survivalshowdown.command.WorldInfoCommand;
 import com.rosed.survivalshowdown.listener.PlayerCraftEvent;
@@ -66,6 +67,7 @@ public enum InstanceManager {
         // register commands
         survivalShowdown.getCommand("lobby").setExecutor(new LobbyCommand());
         survivalShowdown.getCommand("worldinfo").setExecutor(new WorldInfoCommand());
+        survivalShowdown.getCommand("createworld").setExecutor(new CreateWorldCommand());
 
         // register events
         Bukkit.getPluginManager().registerEvents(new PlayerCraftEvent(), survivalShowdown);
