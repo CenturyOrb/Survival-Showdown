@@ -134,8 +134,8 @@ public class WorldManager {
         ThreadLocalRandom random = ThreadLocalRandom.current();
         long number = random.nextLong();
         String stringSeed = number + "";
-        String p1End = "P1_" + lobbyID;
-        String p2End = "P2_" + lobbyID;
+        String p1End = "1_" + lobbyID;
+        String p2End = "2_" + lobbyID;
 
         Player p1 = lobby.getPlayerList().get(0);
         Player p2 = lobby.getPlayerList().get(1);
@@ -149,14 +149,14 @@ public class WorldManager {
 
         List<MultiverseWorld> playerMVLiveWorld = new ArrayList<>();
 
-        mvWorldManager.addWorld(configManager.getLiveOverworldFormat().replace("#", playerEnd), World.Environment.NORMAL, stringSeed, WorldType.NORMAL, true, "Multiverse-Core");
-        playerMVLiveWorld.add(mvWorldManager.getMVWorld(configManager.getLiveOverworldFormat().replace("#", playerEnd)));
+        mvWorldManager.addWorld(configManager.getLiveOverworldFormat().replace("#", playerEnd) + "_world", World.Environment.NORMAL, stringSeed, WorldType.NORMAL, true, "Multiverse-Core");
+        playerMVLiveWorld.add(mvWorldManager.getMVWorld(configManager.getLiveOverworldFormat().replace("#", playerEnd) + "_world"));
 
-        mvWorldManager.addWorld(configManager.getLiveNetherFormat().replace("#", playerEnd), World.Environment.NETHER, stringSeed, WorldType.NORMAL, true, "Multiverse-Core");
-        playerMVLiveWorld.add(mvWorldManager.getMVWorld(configManager.getLiveNetherFormat().replace("#", playerEnd)));
+        mvWorldManager.addWorld(configManager.getLiveNetherFormat().replace("#", playerEnd) + "_nether", World.Environment.NETHER, stringSeed, WorldType.NORMAL, true, "Multiverse-Core");
+        playerMVLiveWorld.add(mvWorldManager.getMVWorld(configManager.getLiveNetherFormat().replace("#", playerEnd) + "_nether"));
 
-        mvWorldManager.addWorld(configManager.getLiveEndFormat().replace("#", playerEnd), World.Environment.THE_END, stringSeed, WorldType.NORMAL, true, "Multiverse-Core");
-        playerMVLiveWorld.add(mvWorldManager.getMVWorld(configManager.getLiveEndFormat().replace("#", playerEnd)));
+        mvWorldManager.addWorld(configManager.getLiveEndFormat().replace("#", playerEnd) + "_the_end", World.Environment.THE_END, stringSeed, WorldType.NORMAL, true, "Multiverse-Core");
+        playerMVLiveWorld.add(mvWorldManager.getMVWorld(configManager.getLiveEndFormat().replace("#", playerEnd) + "_the_end"));
 
         livePlayerWorldMap.put(player, playerMVLiveWorld);
     }

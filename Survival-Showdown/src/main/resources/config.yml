@@ -36,9 +36,9 @@
   # Name format of the live worlds
   # the '#' represents the lobby's ID
   live-format:
-    overworld-format: 'Live_Overworld_#'
-    nether-format: 'Live_Nether_#'
-    end-format: 'Live_End_#'
+    overworld-format: 'Live_P#'
+    nether-format: 'Live_P#'
+    end-format: 'Live_P#'
 
   # ----------------------------------
   # Teleport Locations for Lobby
