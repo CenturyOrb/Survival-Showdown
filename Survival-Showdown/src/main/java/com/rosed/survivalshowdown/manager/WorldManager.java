@@ -149,8 +149,8 @@ public class WorldManager {
 
         List<MultiverseWorld> playerMVLiveWorld = new ArrayList<>();
 
-        mvWorldManager.addWorld(configManager.getLiveOverworldFormat().replace("#", playerEnd) + "_world", World.Environment.NORMAL, stringSeed, WorldType.NORMAL, true, "Multiverse-Core");
-        playerMVLiveWorld.add(mvWorldManager.getMVWorld(configManager.getLiveOverworldFormat().replace("#", playerEnd) + "_world"));
+        mvWorldManager.addWorld(configManager.getLiveOverworldFormat().replace("#", playerEnd), World.Environment.NORMAL, stringSeed, WorldType.NORMAL, true, "Multiverse-Core");
+        playerMVLiveWorld.add(mvWorldManager.getMVWorld(configManager.getLiveOverworldFormat().replace("#", playerEnd)));
 
         mvWorldManager.addWorld(configManager.getLiveNetherFormat().replace("#", playerEnd) + "_nether", World.Environment.NETHER, stringSeed, WorldType.NORMAL, true, "Multiverse-Core");
         playerMVLiveWorld.add(mvWorldManager.getMVWorld(configManager.getLiveNetherFormat().replace("#", playerEnd) + "_nether"));
