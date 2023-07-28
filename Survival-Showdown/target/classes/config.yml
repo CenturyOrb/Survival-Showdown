@@ -44,24 +44,24 @@
   # Teleport Locations for Lobby
   lobby-location:
     x: 8
-    y: -60
+    y: 4
     z: 8
     pitch: 0
     yaw: 0
 
   # ----------------------------------
-  # Teleport Locations for Lobby
+  # Teleport Locations for Arena
   arena-location:
     player1:
-      x: 8
-      y: -45
-      z: -15
+      x: 3
+      y: 28
+      z: -17
       pitch: 0
       yaw: 0
     player2:
-      x: 8
-      y: -45
-      z: 31
+      x: 3
+      y: 28
+      z: 29
       pitch: 0
       yaw: 0
 

@@ -1,7 +1,7 @@
 name: Survival-Showdown
 version: '1.0-SNAPSHOT'
 main: com.rosed.survivalshowdown.SurvivalShowdown
-api-version: '1.19'
+api-version: '1.17'
 softdepend: ['Multiverse-Core']
 commands:
   lobby:
