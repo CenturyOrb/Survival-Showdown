@@ -41,6 +41,9 @@ public class Game {
 
     }
 
+    /**
+     * start the game, teleport players to the live worlds
+     */
     public void start()   {
 
         playerList = lobby.getPlayerList();
@@ -61,6 +64,28 @@ public class Game {
         lobby.sendMessage(ChatColor.translateAlternateColorCodes('&', "&e                  for the fight. First to 3 wins"));
         lobby.sendMessage("");
         lobby.sendMessage(ChatColor.translateAlternateColorCodes('&', "&a&l-----------------------------------------------"));
+
+    }
+
+    /**
+     * starts the arena fight phrase of the game
+     */
+    public void startArenaFight()   {
+
+        gameState = GameState.ARENA;
+        // unload Live worlds
+
+    }
+
+    /**
+     * ends the game
+     */
+    public void end()   {
+
+        // remove players from lobby playerlist
+        // delete live worlds
+        // reset Arena world
+        // teleport players to Hub
 
     }
 
