@@ -24,6 +24,9 @@ public class CraftManager {
     private HashMap<Player, List<Craftable>> craftableMap;
 
     private ItemStack budgetGap;
+    private ItemStack multiTool;
+    private ItemStack diggity;
+
 
     public CraftManager()   {
 
