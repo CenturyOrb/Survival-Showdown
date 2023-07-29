@@ -1,21 +1,25 @@
 package com.rosed.survivalshowdown.instance;
 
 import com.onarandombox.MultiverseCore.api.MultiverseWorld;
+import com.rosed.survivalshowdown.SurvivalShowdown;
 import com.rosed.survivalshowdown.manager.ConfigManager;
 import com.rosed.survivalshowdown.manager.InstanceManager;
 import com.rosed.survivalshowdown.manager.WorldManager;
 import lombok.Getter;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-public class Game {
+public class Game extends BukkitRunnable {
 
+    private final SurvivalShowdown survivalShowdown;
     private final ConfigManager configManager;
     private final WorldManager worldManager;
 
@@ -27,6 +31,7 @@ public class Game {
 
     public Game(Lobby lobby)   {
 
+        survivalShowdown = InstanceManager.INSTANCE.getSurvivalShowdown();
         configManager = InstanceManager.INSTANCE.getConfigManager();
         worldManager = InstanceManager.INSTANCE.getWorldManager();
 
@@ -65,15 +70,17 @@ public class Game {
         lobby.sendMessage("");
         lobby.sendMessage(ChatColor.translateAlternateColorCodes('&', "&a&l-----------------------------------------------"));
 
+        // start the timer for Arena Fight
+        runTaskLater(survivalShowdown, 400);
     }
 
-    /**
-     * starts the arena fight phrase of the game
-     */
-    public void startArenaFight()   {
+    @Override
+    public void run() {
 
         gameState = GameState.ARENA;
-        // unload Live worlds
+        playerList.get(0).teleport(player1ArenaLocation);
+        playerList.get(1).teleport(player2ArenaLocation);
+        lobby.sendTitle(ChatColor.RED + "FINAL FIGHT", "");
 
     }
 
