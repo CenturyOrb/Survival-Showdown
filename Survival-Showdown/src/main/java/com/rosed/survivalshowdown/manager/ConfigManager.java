@@ -69,8 +69,8 @@ public class ConfigManager {
                 config.getInt(configPath + ".x"),
                 config.getInt(configPath + ".y"),
                 config.getInt(configPath + ".z"),
-                config.getInt(configPath + ".pitch"),
-                config.getInt(configPath + ".yaw")
+                config.getInt(configPath + ".yaw"),
+                config.getInt(configPath + ".pitch")
         );
 
     }
