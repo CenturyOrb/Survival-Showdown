@@ -1,4 +1,6 @@
 package com.rosed.survivalshowdown.listener;
 
-public class PlayerDeathInArenaEvent {
+import org.bukkit.event.Listener;
+
+public class PlayerDeathInArenaEvent implements Listener {
 }
