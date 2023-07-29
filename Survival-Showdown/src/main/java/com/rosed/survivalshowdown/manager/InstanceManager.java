@@ -6,6 +6,7 @@ import com.rosed.survivalshowdown.SurvivalShowdown;
 import com.rosed.survivalshowdown.command.CreateWorldCommand;
 import com.rosed.survivalshowdown.command.LobbyCommand;
 import com.rosed.survivalshowdown.command.WorldInfoCommand;
+import com.rosed.survivalshowdown.listener.DiamondBreakEvent;
 import com.rosed.survivalshowdown.listener.PlayerCraftEvent;
 import lombok.Getter;
 import org.bukkit.Bukkit;
@@ -72,6 +73,7 @@ public enum InstanceManager {
 
         // register events
         Bukkit.getPluginManager().registerEvents(new PlayerCraftEvent(), survivalShowdown);
+        Bukkit.getPluginManager().registerEvents(new DiamondBreakEvent(), survivalShowdown);
 
     }
 }
