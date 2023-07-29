@@ -46,7 +46,7 @@ public class FishingRodPullEvent implements Listener {
             Vector knockback = hook.getOrigin().toVector().subtract(entity.getLocation().toVector()).normalize();
 
             entity.damage(0.1);
-            entity.setVelocity(new Vector(-knockback.getX(), 0.4, -knockback.getZ()));
+            entity.setVelocity(new Vector(-knockback.getX() * 1.1, 0.45, -knockback.getZ() * 1.1));
         }
     }
 }
