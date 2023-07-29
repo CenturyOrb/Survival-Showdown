@@ -7,9 +7,11 @@ import com.rosed.survivalshowdown.command.CreateWorldCommand;
 import com.rosed.survivalshowdown.command.LobbyCommand;
 import com.rosed.survivalshowdown.command.WorldInfoCommand;
 import com.rosed.survivalshowdown.listener.DiamondBreakEvent;
+import com.rosed.survivalshowdown.listener.FishingRodPullEvent;
 import com.rosed.survivalshowdown.listener.PlayerCraftEvent;
 import lombok.Getter;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Fish;
 
 @Getter
 public enum InstanceManager {
@@ -74,6 +76,7 @@ public enum InstanceManager {
         // register events
         Bukkit.getPluginManager().registerEvents(new PlayerCraftEvent(), survivalShowdown);
         Bukkit.getPluginManager().registerEvents(new DiamondBreakEvent(), survivalShowdown);
+        Bukkit.getPluginManager().registerEvents(new FishingRodPullEvent(), survivalShowdown);
 
     }
 }

@@ -1,6 +1,7 @@
 package com.rosed.survivalshowdown.listener;
 
 import com.destroystokyo.paper.MaterialTags;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -28,7 +29,7 @@ public class DiamondBreakEvent implements Listener {
             Block relative = broken.getRelative(face);
             Material relativeType = relative.getType();
 
-            if (relativeType != Material.STONE) break;
+            if (relativeType != Material.STONE && relativeType != Material.DEEPSLATE) break;
             if (isCovered(relative) && ThreadLocalRandom.current().nextInt(100) <= 33)   {
                 relative.setType(broken.getType());
             }
