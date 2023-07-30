@@ -77,7 +77,16 @@ public class Game extends BukkitRunnable {
         // start the timer for Arena Fight
         runTaskLater(survivalShowdown, 400);
 
-        // display scoreboard for players
+    }
+
+    @Override
+    public void run() {
+
+        gameState = GameState.ARENA;
+        playerList.get(0).teleport(player1ArenaLocation);
+        playerList.get(1).teleport(player2ArenaLocation);
+        lobby.sendTitle(ChatColor.RED + "FINAL FIGHT", "");
+
         Scoreboard board = Bukkit.getScoreboardManager().getNewScoreboard();
 
         Objective obj = board.registerNewObjective("liveboard", "dummy");
@@ -90,7 +99,7 @@ public class Game extends BukkitRunnable {
         Score time = obj.getScore(ChatColor.BOLD + ChatColor.GOLD.toString() + "Arena Enables in");
         time.setScore(4);
 
-        Score liveTime = obj.getScore(ChatColor.GREEN + "X Minutes");
+        Score liveTime = obj.getScore( "X Minutes");
         liveTime.setScore(3);
 
         Score emptyLine2 = obj.getScore(" ");
@@ -100,16 +109,6 @@ public class Game extends BukkitRunnable {
         serverIP.setScore(1);
 
         playerList.forEach(player -> player.setScoreboard(board));
-
-    }
-
-    @Override
-    public void run() {
-
-        gameState = GameState.ARENA;
-        playerList.get(0).teleport(player1ArenaLocation);
-        playerList.get(1).teleport(player2ArenaLocation);
-        lobby.sendTitle(ChatColor.RED + "FINAL FIGHT", "");
 
     }
 
