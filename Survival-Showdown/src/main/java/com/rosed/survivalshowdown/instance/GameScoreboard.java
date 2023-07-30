@@ -52,7 +52,7 @@ public class GameScoreboard {
             public void run() {
                 updateTimer();
             }
-        }.runTaskTimer(survivalShowdown, 0, 60 * 20);
+        }.runTaskTimer(survivalShowdown, 1200, 60 * 20);
 
     }
 
