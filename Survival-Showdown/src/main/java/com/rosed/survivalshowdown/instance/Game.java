@@ -9,13 +9,9 @@ import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scoreboard.DisplaySlot;
-import org.bukkit.scoreboard.Objective;
-import org.bukkit.scoreboard.Score;
-import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.scoreboard.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +28,7 @@ public class Game extends BukkitRunnable {
     private GameState gameState;
     private List<Player> playerList;
     private Location player1ArenaLocation, player2ArenaLocation;
+    private GameScoreboard gameScoreboard;
 
     public Game(Lobby lobby)   {
 
@@ -43,6 +40,7 @@ public class Game extends BukkitRunnable {
         this.gameID = lobby.getLobbyID();
         gameState = GameState.RECRUITING;
         playerList = new ArrayList<>();
+        gameScoreboard = new GameScoreboard(this);
 
         setPlayerArenaLocations();
 
@@ -77,6 +75,8 @@ public class Game extends BukkitRunnable {
         // start the timer for Arena Fight
         runTaskLater(survivalShowdown, 400);
 
+        playerList.forEach(player -> player.setScoreboard(gameScoreboard.getBoard()));
+
     }
 
     @Override
@@ -86,29 +86,6 @@ public class Game extends BukkitRunnable {
         playerList.get(0).teleport(player1ArenaLocation);
         playerList.get(1).teleport(player2ArenaLocation);
         lobby.sendTitle(ChatColor.RED + "FINAL FIGHT", "");
-
-        Scoreboard board = Bukkit.getScoreboardManager().getNewScoreboard();
-
-        Objective obj = board.registerNewObjective("liveboard", "dummy");
-        obj.setDisplaySlot(DisplaySlot.SIDEBAR);
-        obj.setDisplayName(ChatColor.YELLOW + ChatColor.BOLD.toString() + "    SURVIVAL SHOWDOWN    ");
-
-        Score emptyLine1 = obj.getScore("");
-        emptyLine1.setScore(5);
-
-        Score time = obj.getScore(ChatColor.BOLD + ChatColor.GOLD.toString() + "Arena Enables in");
-        time.setScore(4);
-
-        Score liveTime = obj.getScore( "X Minutes");
-        liveTime.setScore(3);
-
-        Score emptyLine2 = obj.getScore(" ");
-        emptyLine2.setScore(2);
-
-        Score serverIP = obj.getScore(ChatColor.YELLOW + "localhost");
-        serverIP.setScore(1);
-
-        playerList.forEach(player -> player.setScoreboard(board));
 
     }
 
