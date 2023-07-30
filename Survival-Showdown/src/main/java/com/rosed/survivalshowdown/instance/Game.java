@@ -72,7 +72,7 @@ public class Game extends BukkitRunnable {
         lobby.sendMessage(ChatColor.translateAlternateColorCodes('&', "&a&l-----------------------------------------------"));
 
         // start the timer for Arena Fight
-        runTaskLater(survivalShowdown, 400);
+        runTaskLater(survivalShowdown, 6000);
 
         gameScoreboard = new GameScoreboard(this);
         playerList.forEach(player -> player.setScoreboard(gameScoreboard.getBoard()));
@@ -85,6 +85,7 @@ public class Game extends BukkitRunnable {
         gameState = GameState.ARENA;
         playerList.get(0).teleport(player1ArenaLocation);
         playerList.get(1).teleport(player2ArenaLocation);
+        gameScoreboard.getBoard().clearSlot(DisplaySlot.SIDEBAR);
         lobby.sendTitle(ChatColor.RED + "FINAL FIGHT", "");
 
     }

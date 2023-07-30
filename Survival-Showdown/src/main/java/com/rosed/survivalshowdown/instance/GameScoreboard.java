@@ -15,14 +15,13 @@ public class GameScoreboard {
 
     private Game game;
     private Scoreboard board;
-    private int minutes;
+    private int minutes = 5;
 
     public GameScoreboard(Game game)   {
 
         survivalShowdown = InstanceManager.INSTANCE.getSurvivalShowdown();
 
         this.game = game;
-        minutes = 30;
 
         board = Bukkit.getScoreboardManager().getNewScoreboard();
         Objective obj = board.registerNewObjective("liveboard", "dummy");
@@ -61,7 +60,6 @@ public class GameScoreboard {
         minutes--;
         game.getPlayerList().forEach(player -> player.getScoreboard().getTeam("time").setPrefix("" + minutes));
         if (minutes == 1)   {
-
             game.getPlayerList().forEach(player -> player.getScoreboard().getTeam("time").setSuffix(" minute"));
         }
 
