@@ -12,6 +12,10 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scoreboard.DisplaySlot;
+import org.bukkit.scoreboard.Objective;
+import org.bukkit.scoreboard.Score;
+import org.bukkit.scoreboard.Scoreboard;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,6 +76,31 @@ public class Game extends BukkitRunnable {
 
         // start the timer for Arena Fight
         runTaskLater(survivalShowdown, 400);
+
+        // display scoreboard for players
+        Scoreboard board = Bukkit.getScoreboardManager().getNewScoreboard();
+
+        Objective obj = board.registerNewObjective("liveboard", "dummy");
+        obj.setDisplaySlot(DisplaySlot.SIDEBAR);
+        obj.setDisplayName(ChatColor.YELLOW + ChatColor.BOLD.toString() + "    SURVIVAL SHOWDOWN    ");
+
+        Score emptyLine1 = obj.getScore("");
+        emptyLine1.setScore(5);
+
+        Score time = obj.getScore(ChatColor.BOLD + ChatColor.GOLD.toString() + "Arena Enables in");
+        time.setScore(4);
+
+        Score liveTime = obj.getScore(ChatColor.GREEN + "X Minutes");
+        liveTime.setScore(3);
+
+        Score emptyLine2 = obj.getScore(" ");
+        emptyLine2.setScore(2);
+
+        Score serverIP = obj.getScore(ChatColor.YELLOW + "localhost");
+        serverIP.setScore(1);
+
+        playerList.forEach(player -> player.setScoreboard(board));
+
     }
 
     @Override
