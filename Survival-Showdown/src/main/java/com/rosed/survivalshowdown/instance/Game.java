@@ -40,7 +40,6 @@ public class Game extends BukkitRunnable {
         this.gameID = lobby.getLobbyID();
         gameState = GameState.RECRUITING;
         playerList = new ArrayList<>();
-        gameScoreboard = new GameScoreboard(this);
 
         setPlayerArenaLocations();
 
@@ -75,6 +74,7 @@ public class Game extends BukkitRunnable {
         // start the timer for Arena Fight
         runTaskLater(survivalShowdown, 400);
 
+        gameScoreboard = new GameScoreboard(this);
         playerList.forEach(player -> player.setScoreboard(gameScoreboard.getBoard()));
 
     }
