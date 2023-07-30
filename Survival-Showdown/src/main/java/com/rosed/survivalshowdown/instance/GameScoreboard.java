@@ -38,7 +38,7 @@ public class GameScoreboard {
         Team timeCountdown = board.registerNewTeam("time");
         timeCountdown.addEntry(ChatColor.BOLD.toString());
         timeCountdown.setPrefix("" + minutes);
-        timeCountdown.setSuffix(" Minutes");
+        timeCountdown.setSuffix(" minutes");
         obj.getScore(ChatColor.BOLD.toString()).setScore(3);
 
         Score emptyLine2 = obj.getScore(" ");
@@ -60,6 +60,10 @@ public class GameScoreboard {
 
         minutes--;
         game.getPlayerList().forEach(player -> player.getScoreboard().getTeam("time").setPrefix("" + minutes));
+        if (minutes == 1)   {
+
+            game.getPlayerList().forEach(player -> player.getScoreboard().getTeam("time").setSuffix(" minute"));
+        }
 
     }
 
