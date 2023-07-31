@@ -6,6 +6,7 @@ import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.scoreboard.*;
 
 @Getter
@@ -13,9 +14,10 @@ public class GameScoreboard {
 
     private final SurvivalShowdown survivalShowdown;
 
-    private Game game;
-    private Scoreboard board;
+    private final Game game;
+    private final Scoreboard board;
     private int minutes = 5;
+    private final BukkitTask countdown;
 
     public GameScoreboard(Game game)   {
 
@@ -46,7 +48,7 @@ public class GameScoreboard {
         Score serverIP = obj.getScore(ChatColor.YELLOW + "localhost");
         serverIP.setScore(1);
 
-        new BukkitRunnable() {
+        countdown = new BukkitRunnable() {
             @Override
             public void run() {
                 updateTimer();
@@ -55,12 +57,17 @@ public class GameScoreboard {
 
     }
 
+    /**
+     * keeps the timer on sidebar updated
+     */
     public void updateTimer()   {
 
         minutes--;
         game.getPlayerList().forEach(player -> player.getScoreboard().getTeam("time").setPrefix("" + minutes));
         if (minutes == 1)   {
             game.getPlayerList().forEach(player -> player.getScoreboard().getTeam("time").setSuffix(" minute"));
+        } else if (minutes == 0){
+            countdown.cancel();
         }
 
     }

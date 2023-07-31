@@ -79,6 +79,9 @@ public class Game extends BukkitRunnable {
 
     }
 
+    /**
+     * after Live state ends. Start arena fight
+     */
     @Override
     public void run() {
 
