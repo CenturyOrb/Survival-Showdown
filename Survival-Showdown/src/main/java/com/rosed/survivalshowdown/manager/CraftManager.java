@@ -7,9 +7,11 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
+import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
@@ -24,33 +26,37 @@ public class CraftManager {
     private HashMap<Player, List<Craftable>> craftableMap;
 
     private ItemStack budgetGap;
+    private ItemStack sharpEnchantmentBook;
+    private ItemStack avidity;
     private ItemStack multiTool;
     private ItemStack diggity;
 
 
-    public CraftManager()   {
+    public CraftManager() {
 
         survivalShowdown = InstanceManager.INSTANCE.getSurvivalShowdown();
 
         craftableMap = new HashMap<>();
 
         setUpBudgetGapRecipe();
+        setUpSharpnessEchantmentBook();
 
     }
 
     /**
      * updates the Craftable in the map
+     *
      * @param player player crafting
-     * @param item item being crafted
+     * @param item   item being crafted
      * @param amount amount being crafted
      * @return true or false if the player can craft the item
      */
-    public boolean updatePlayerCraftable(Player player, ItemStack item, int amount)   {
+    public boolean updatePlayerCraftable(Player player, ItemStack item, int amount) {
 
         String localizedName = item.getItemMeta().getLocalizedName();
 
-        for (Craftable craftable : craftableMap.get(player))   {
-            if (craftable.getLocalizedName().equals(localizedName))   {
+        for (Craftable craftable : craftableMap.get(player)) {
+            if (craftable.getLocalizedName().equals(localizedName)) {
                 return craftable.canCraftAmount(amount);
             }
         }
@@ -60,15 +66,18 @@ public class CraftManager {
 
     /**
      * checks if an item is a Craftable item
+     *
      * @param item item
      * @return true or false if item is a craftable
      */
-    public boolean isCraftable(ItemStack item)   {
+    public boolean isCraftable(ItemStack item) {
 
-        if (!item.getItemMeta().hasLocalizedName())   { return false; }
+        if (!item.getItemMeta().hasLocalizedName()) {
+            return false;
+        }
 
-        for (Craftable craftable : getCraftablePreset())   {
-            if (craftable.getLocalizedName().equals(item.getItemMeta().getLocalizedName()))   {
+        for (Craftable craftable : getCraftablePreset()) {
+            if (craftable.getLocalizedName().equals(item.getItemMeta().getLocalizedName())) {
                 return true;
             }
         }
@@ -78,21 +87,23 @@ public class CraftManager {
 
     /**
      * gets craftable preset of a new player
+     *
      * @return return cratable preset
      */
-    public List<Craftable> getCraftablePreset()   {
+    public List<Craftable> getCraftablePreset() {
 
         List<Craftable> craftables = new ArrayList<>();
         craftables.add(new Craftable(2, budgetGap));
+        craftables.add(new Craftable(2, sharpEnchantmentBook));
 
         return craftables;
 
     }
 
     /**
-     * sets up custom item ItemStacks
+     * sets up budget gaps recipe
      */
-    private void setUpBudgetGapRecipe()   {
+    private void setUpBudgetGapRecipe() {
 
         budgetGap = new ItemStack(Material.GOLDEN_APPLE);
         ItemMeta budgetGapMeta = budgetGap.getItemMeta();
@@ -113,4 +124,28 @@ public class CraftManager {
 
     }
 
+    /**
+     * sets up sharp book recipe
+     */
+    private void setUpSharpnessEchantmentBook() {
+
+        sharpEnchantmentBook = new ItemStack(Material.ENCHANTED_BOOK);
+        EnchantmentStorageMeta sharpEnchantmentBookMeta = (EnchantmentStorageMeta) sharpEnchantmentBook.getItemMeta();
+        sharpEnchantmentBookMeta.setLocalizedName("survivalShowdown.sharpbook");
+        sharpEnchantmentBookMeta.addStoredEnchant(Enchantment.DAMAGE_ALL, 1, true);
+        sharpEnchantmentBook.setItemMeta(sharpEnchantmentBookMeta);
+
+        ShapedRecipe sharpEnchantmentBookRecipe = new ShapedRecipe(new NamespacedKey(survivalShowdown, "sharpbook"), sharpEnchantmentBook);
+        sharpEnchantmentBookRecipe.shape(
+                "F  ",
+                " PP",
+                " PS");
+
+        sharpEnchantmentBookRecipe.setIngredient('F', Material.FLINT);
+        sharpEnchantmentBookRecipe.setIngredient('P', Material.PAPER);
+        sharpEnchantmentBookRecipe.setIngredient('S', Material.IRON_SWORD);
+
+        Bukkit.addRecipe(sharpEnchantmentBookRecipe);
+
+    }
 }
