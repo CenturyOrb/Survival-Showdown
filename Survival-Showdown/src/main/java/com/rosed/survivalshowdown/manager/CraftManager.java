@@ -243,7 +243,7 @@ public class CraftManager {
 
         budgetAnvil = new ItemStack(Material.ANVIL);
         ItemMeta budgetAnvilMeta = budgetAnvil.getItemMeta();
-        budgetAnvilMeta.setDisplayName("Anvil");
+        budgetAnvilMeta.setDisplayName(ChatColor.WHITE + "Budget Anvil");
         budgetAnvilMeta.setLocalizedName("survivalShowdown.budgetAnvil");
         budgetAnvil.setItemMeta(budgetAnvilMeta);
 
@@ -265,7 +265,7 @@ public class CraftManager {
         budgetPaper = new ItemStack(Material.PAPER);
         budgetPaper.setAmount(3);
         ItemMeta budgetPaperMeta = budgetPaper.getItemMeta();
-        budgetPaperMeta.setDisplayName("Paper");
+        budgetPaperMeta.setDisplayName(ChatColor.WHITE + "Budget Paper");
         budgetPaperMeta.setLocalizedName("survivalShowdown.budgetPaper");
         budgetPaper.setItemMeta(budgetPaperMeta);
 

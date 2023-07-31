@@ -9,7 +9,18 @@ import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.potion.Potion;
+import org.bukkit.potion.PotionData;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.*;
 
@@ -29,6 +40,8 @@ public class Game extends BukkitRunnable {
     private List<Player> playerList;
     private Location player1ArenaLocation, player2ArenaLocation;
     private GameScoreboard gameScoreboard;
+    private List<PotionEffect> livePotions;
+    private Inventory liveInventory;
 
     public Game(Lobby lobby)   {
 
@@ -42,6 +55,7 @@ public class Game extends BukkitRunnable {
         playerList = new ArrayList<>();
 
         setPlayerArenaLocations();
+        setUpLivePotions();
 
         System.out.println("Game: " + gameID + " is loaded");
 
@@ -55,10 +69,13 @@ public class Game extends BukkitRunnable {
         playerList = lobby.getPlayerList();
 
         // teleport players to rightful worlds
+        // add live state potion effects
+        // give players stone tools kit
         for (Player player : playerList)   {
             if (worldManager.getLivePlayerWorldMap().get(player) != null)   {
                 MultiverseWorld mvWorld = worldManager.getLivePlayerWorldMap().get(player).get(0);
                 player.teleport(mvWorld.getSpawnLocation());
+                player.addPotionEffects(livePotions);
             }
         }
 
@@ -112,6 +129,28 @@ public class Game extends BukkitRunnable {
 
         player1ArenaLocation = configManager.getLocation("arena-location.player1", worldManager.getArenaWorldName(gameID));
         player2ArenaLocation = configManager.getLocation("arena-location.player2", worldManager.getArenaWorldName(gameID));
+
+    }
+
+    /**
+     * potion effects for players during the live state
+     */
+    private void setUpLivePotions()   {
+
+        livePotions = new ArrayList<>();
+        livePotions.add(new PotionEffect(PotionEffectType.SATURATION, Integer.MAX_VALUE, 3, true, false));
+        livePotions.add(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, Integer.MAX_VALUE, 0, true, false));
+        livePotions.add(new PotionEffect(PotionEffectType.FAST_DIGGING, Integer.MAX_VALUE, 1, true, false));
+        livePotions.add(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0, true, false));
+
+    }
+
+    private void setUpLiveKit()   {
+
+        liveInventory = Bukkit.createInventory(null, InventoryType.PLAYER);
+        liveInventory.addItem(new ItemStack(Material.STONE_SWORD));
+        ItemMeta stoneToolMeta = new ItemStack(Material.IRON_PICKAXE).getItemMeta();
+        stoneToolMeta.addEnchant(Enchantment.DIG_SPEED, 2, true);
 
     }
 
