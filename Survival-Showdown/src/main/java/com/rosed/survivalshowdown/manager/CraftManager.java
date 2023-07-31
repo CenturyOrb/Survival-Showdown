@@ -27,6 +27,7 @@ public class CraftManager {
 
     private ItemStack budgetGap;
     private ItemStack sharpEnchantmentBook;
+    private ItemStack protectionEnchantmentBook;
     private ItemStack avidity;
     private ItemStack multiTool;
     private ItemStack diggity;
@@ -40,6 +41,7 @@ public class CraftManager {
 
         setUpBudgetGapRecipe();
         setUpSharpnessEchantmentBook();
+        setUpProtectionEnchantmentBook();
         setUpAvidity();
 
     }
@@ -95,7 +97,8 @@ public class CraftManager {
 
         List<Craftable> craftables = new ArrayList<>();
         craftables.add(new Craftable(2, budgetGap));
-        craftables.add(new Craftable(2, sharpEnchantmentBook));
+        craftables.add(new Craftable(3, sharpEnchantmentBook));
+        craftables.add(new Craftable(8, protectionEnchantmentBook));
         craftables.add(new Craftable(1, avidity));
 
         return craftables;
@@ -152,6 +155,28 @@ public class CraftManager {
 
     }
 
+    private void setUpProtectionEnchantmentBook()   {
+
+        protectionEnchantmentBook = new ItemStack(Material.ENCHANTED_BOOK);
+        EnchantmentStorageMeta protectionEnchantmentBookMeta = (EnchantmentStorageMeta) protectionEnchantmentBook.getItemMeta();
+        protectionEnchantmentBookMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Protection Book");
+        protectionEnchantmentBookMeta.setLocalizedName("survivalShowdown.protectionbook");
+        protectionEnchantmentBookMeta.addStoredEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
+        protectionEnchantmentBook.setItemMeta(protectionEnchantmentBookMeta);
+
+        ShapedRecipe protectionEnchantmentBookRecipe = new ShapedRecipe(new NamespacedKey(survivalShowdown, "protectionbook"), protectionEnchantmentBook);
+        protectionEnchantmentBookRecipe.shape(
+                "   ",
+                "  P",
+                " PI");
+
+        protectionEnchantmentBookRecipe.setIngredient('P', Material.PAPER);
+        protectionEnchantmentBookRecipe.setIngredient('I', Material.IRON_INGOT);
+
+        Bukkit.addRecipe(protectionEnchantmentBookRecipe);
+
+    }
+
     private void setUpAvidity()   {
 
         avidity = new ItemStack(Material.GOLDEN_AXE);
@@ -166,12 +191,12 @@ public class CraftManager {
         ShapedRecipe avidityRecipe = new ShapedRecipe(new NamespacedKey(survivalShowdown, "avidity"), avidity);
         avidityRecipe.shape(
                 " B ",
-                " S ",
+                " A ",
                 " F ");
 
         avidityRecipe.setIngredient('F', Material.ROTTEN_FLESH);
         avidityRecipe.setIngredient('B', Material.BONE);
-        avidityRecipe.setIngredient('S', Material.IRON_SWORD);
+        avidityRecipe.setIngredient('A', Material.GOLDEN_AXE);
 
         Bukkit.addRecipe(avidityRecipe);
 
