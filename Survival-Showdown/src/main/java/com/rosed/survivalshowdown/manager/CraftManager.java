@@ -13,6 +13,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.checkerframework.checker.units.qual.C;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -46,6 +47,7 @@ public class CraftManager {
         setUpProtectionEnchantmentBook();
         setUpAvidity();
         setUpBudgetAnvil();
+        setUpBudgetPaper();
 
     }
 
@@ -104,6 +106,7 @@ public class CraftManager {
         craftables.add(new Craftable(8, protectionEnchantmentBook));
         craftables.add(new Craftable(1, avidity));
         craftables.add(new Craftable(4, budgetAnvil));
+        craftables.add(new Craftable(12, budgetPaper));
 
         return craftables;
 
@@ -210,6 +213,7 @@ public class CraftManager {
 
         budgetAnvil = new ItemStack(Material.ANVIL);
         ItemMeta budgetAnvilMeta = budgetAnvil.getItemMeta();
+        budgetAnvilMeta.setDisplayName("Anvil");
         budgetAnvilMeta.setLocalizedName("survivalShowdown.budgetAnvil");
         budgetAnvil.setItemMeta(budgetAnvilMeta);
 
@@ -223,6 +227,27 @@ public class CraftManager {
         budgetAnvilRecipe.setIngredient('S', Material.IRON_INGOT);
 
         Bukkit.addRecipe(budgetAnvilRecipe);
+
+    }
+
+    private void setUpBudgetPaper()   {
+
+        budgetPaper = new ItemStack(Material.PAPER);
+        budgetPaper.setAmount(3);
+        ItemMeta budgetPaperMeta = budgetPaper.getItemMeta();
+        budgetPaperMeta.setDisplayName("Paper");
+        budgetPaperMeta.setLocalizedName("survivalShowdown.budgetPaper");
+        budgetPaper.setItemMeta(budgetPaperMeta);
+
+        ShapedRecipe budgetPaperRecipe = new ShapedRecipe(new NamespacedKey(survivalShowdown, "budgetPaper"), budgetPaper);
+        budgetPaperRecipe.shape(
+                "   ",
+                "SS ",
+                "   ");
+
+        budgetPaperRecipe.setIngredient('S', Material.SUGAR_CANE);
+
+        Bukkit.addRecipe(budgetPaperRecipe);
 
     }
 }
