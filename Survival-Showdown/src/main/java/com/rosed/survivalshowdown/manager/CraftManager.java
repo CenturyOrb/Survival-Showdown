@@ -11,6 +11,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
+import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.checkerframework.checker.units.qual.C;
@@ -32,6 +33,7 @@ public class CraftManager {
     private ItemStack avidity;
     private ItemStack budgetPaper;
     private ItemStack budgetAnvil;
+    private ItemStack fortunate;
     private ItemStack multiTool;
     private ItemStack starterSword;
 
@@ -48,6 +50,7 @@ public class CraftManager {
         setUpAvidity();
         setUpBudgetAnvil();
         setUpBudgetPaper();
+        setUpFortunate();
 
     }
 
@@ -107,6 +110,7 @@ public class CraftManager {
         craftables.add(new Craftable(1, avidity));
         craftables.add(new Craftable(4, budgetAnvil));
         craftables.add(new Craftable(12, budgetPaper));
+        craftables.add(new Craftable(1, fortunate));
 
         return craftables;
 
@@ -206,6 +210,32 @@ public class CraftManager {
         avidityRecipe.setIngredient('A', Material.GOLDEN_AXE);
 
         Bukkit.addRecipe(avidityRecipe);
+
+    }
+
+    private void setUpFortunate()   {
+
+        fortunate = new ItemStack(Material.DIAMOND_PICKAXE);
+        ItemMeta fortunateMeta = fortunate.getItemMeta();
+        fortunateMeta.setDisplayName(ChatColor.GREEN + "Fortunate");
+        fortunateMeta.setLocalizedName("survivalShowdown.fortunate");
+        fortunateMeta.addEnchant(Enchantment.LOOT_BONUS_BLOCKS, 3, true);
+        Damageable damageable = (Damageable) fortunateMeta;
+        damageable.setDamage(700);
+        fortunate.setItemMeta(fortunateMeta);
+
+        ShapedRecipe fortunateRecipe = new ShapedRecipe(new NamespacedKey(survivalShowdown, "fortunate"), fortunate);
+        fortunateRecipe.shape(
+                "IGI",
+                "LSL",
+                " S ");
+
+        fortunateRecipe.setIngredient('G', Material.GOLD_ORE);
+        fortunateRecipe.setIngredient('I', Material.IRON_ORE);
+        fortunateRecipe.setIngredient('L', Material.LAPIS_BLOCK);
+        fortunateRecipe.setIngredient('S', Material.STICK);
+
+        Bukkit.addRecipe(fortunateRecipe);
 
     }
 
