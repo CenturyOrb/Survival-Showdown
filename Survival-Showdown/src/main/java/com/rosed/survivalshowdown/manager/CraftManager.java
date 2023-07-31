@@ -110,7 +110,7 @@ public class CraftManager {
         craftables.add(new Craftable(1, avidity));
         craftables.add(new Craftable(4, budgetAnvil));
         craftables.add(new Craftable(12, budgetPaper));
-        craftables.add(new Craftable(1, fortunate));
+        craftables.add(new Craftable(2, fortunate));
 
         return craftables;
 
@@ -219,9 +219,9 @@ public class CraftManager {
         ItemMeta fortunateMeta = fortunate.getItemMeta();
         fortunateMeta.setDisplayName(ChatColor.GREEN + "Fortunate");
         fortunateMeta.setLocalizedName("survivalShowdown.fortunate");
-        fortunateMeta.addEnchant(Enchantment.LOOT_BONUS_BLOCKS, 3, true);
+        fortunateMeta.addEnchant(Enchantment.LOOT_BONUS_BLOCKS, 2, true);
         Damageable damageable = (Damageable) fortunateMeta;
-        damageable.setDamage(700);
+        damageable.setDamage(1559);
         fortunate.setItemMeta(fortunateMeta);
 
         ShapedRecipe fortunateRecipe = new ShapedRecipe(new NamespacedKey(survivalShowdown, "fortunate"), fortunate);
