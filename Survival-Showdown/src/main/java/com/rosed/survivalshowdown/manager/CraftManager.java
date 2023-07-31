@@ -29,8 +29,10 @@ public class CraftManager {
     private ItemStack sharpEnchantmentBook;
     private ItemStack protectionEnchantmentBook;
     private ItemStack avidity;
+    private ItemStack budgetPaper;
+    private ItemStack budgetAnvil;
     private ItemStack multiTool;
-    private ItemStack diggity;
+    private ItemStack starterSword;
 
 
     public CraftManager() {
@@ -43,6 +45,7 @@ public class CraftManager {
         setUpSharpnessEchantmentBook();
         setUpProtectionEnchantmentBook();
         setUpAvidity();
+        setUpBudgetAnvil();
 
     }
 
@@ -100,6 +103,7 @@ public class CraftManager {
         craftables.add(new Craftable(3, sharpEnchantmentBook));
         craftables.add(new Craftable(8, protectionEnchantmentBook));
         craftables.add(new Craftable(1, avidity));
+        craftables.add(new Craftable(4, budgetAnvil));
 
         return craftables;
 
@@ -199,6 +203,26 @@ public class CraftManager {
         avidityRecipe.setIngredient('A', Material.GOLDEN_AXE);
 
         Bukkit.addRecipe(avidityRecipe);
+
+    }
+
+    private void setUpBudgetAnvil()   {
+
+        budgetAnvil = new ItemStack(Material.ANVIL);
+        ItemMeta budgetAnvilMeta = budgetAnvil.getItemMeta();
+        budgetAnvilMeta.setLocalizedName("survivalShowdown.budgetAnvil");
+        budgetAnvil.setItemMeta(budgetAnvilMeta);
+
+        ShapedRecipe budgetAnvilRecipe = new ShapedRecipe(new NamespacedKey(survivalShowdown, "budgetAnvil"), budgetAnvil);
+        budgetAnvilRecipe.shape(
+                "SSS",
+                " B ",
+                "SSS");
+
+        budgetAnvilRecipe.setIngredient('B', Material.IRON_BLOCK);
+        budgetAnvilRecipe.setIngredient('S', Material.IRON_INGOT);
+
+        Bukkit.addRecipe(budgetAnvilRecipe);
 
     }
 }
