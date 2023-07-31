@@ -40,6 +40,7 @@ public class CraftManager {
 
         setUpBudgetGapRecipe();
         setUpSharpnessEchantmentBook();
+        setUpAvidity();
 
     }
 
@@ -95,6 +96,7 @@ public class CraftManager {
         List<Craftable> craftables = new ArrayList<>();
         craftables.add(new Craftable(2, budgetGap));
         craftables.add(new Craftable(2, sharpEnchantmentBook));
+        craftables.add(new Craftable(1, avidity));
 
         return craftables;
 
@@ -131,6 +133,7 @@ public class CraftManager {
 
         sharpEnchantmentBook = new ItemStack(Material.ENCHANTED_BOOK);
         EnchantmentStorageMeta sharpEnchantmentBookMeta = (EnchantmentStorageMeta) sharpEnchantmentBook.getItemMeta();
+        sharpEnchantmentBookMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Sharpness Book");
         sharpEnchantmentBookMeta.setLocalizedName("survivalShowdown.sharpbook");
         sharpEnchantmentBookMeta.addStoredEnchant(Enchantment.DAMAGE_ALL, 1, true);
         sharpEnchantmentBook.setItemMeta(sharpEnchantmentBookMeta);
@@ -146,6 +149,31 @@ public class CraftManager {
         sharpEnchantmentBookRecipe.setIngredient('S', Material.IRON_SWORD);
 
         Bukkit.addRecipe(sharpEnchantmentBookRecipe);
+
+    }
+
+    private void setUpAvidity()   {
+
+        avidity = new ItemStack(Material.GOLDEN_AXE);
+        ItemMeta avidityMeta = avidity.getItemMeta();
+        avidityMeta.setDisplayName(ChatColor.GREEN + "Avidity");
+        avidityMeta.setLocalizedName("survivalShowdown.avidity");
+        avidityMeta.addEnchant(Enchantment.DAMAGE_UNDEAD, 2, true);
+        avidityMeta.addEnchant(Enchantment.DAMAGE_ARTHROPODS, 2, true);
+        avidityMeta.addEnchant(Enchantment.LOOT_BONUS_MOBS, 2, true);
+        avidity.setItemMeta(avidityMeta);
+
+        ShapedRecipe avidityRecipe = new ShapedRecipe(new NamespacedKey(survivalShowdown, "avidity"), avidity);
+        avidityRecipe.shape(
+                " B ",
+                " S ",
+                " F ");
+
+        avidityRecipe.setIngredient('F', Material.ROTTEN_FLESH);
+        avidityRecipe.setIngredient('B', Material.BONE);
+        avidityRecipe.setIngredient('S', Material.IRON_SWORD);
+
+        Bukkit.addRecipe(avidityRecipe);
 
     }
 }
