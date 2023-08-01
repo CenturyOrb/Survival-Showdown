@@ -16,7 +16,7 @@ public class GameScoreboard {
 
     private final Game game;
     private final Scoreboard board;
-    private int minutes = 5;
+    private int minutes = 30;
     private final BukkitTask countdown;
 
     public GameScoreboard(Game game)   {

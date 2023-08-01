@@ -14,6 +14,9 @@ import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.PotionMeta;
+import org.bukkit.potion.PotionData;
+import org.bukkit.potion.PotionType;
 import org.checkerframework.checker.units.qual.C;
 
 import java.util.ArrayList;
@@ -37,6 +40,7 @@ public class CraftManager {
     private ItemStack fortunate;
     private ItemStack ironPack;
     private ItemStack goldPack;
+    private ItemStack mukluks;
     private ItemStack multiTool;
     private ItemStack starterSword;
 
@@ -57,6 +61,7 @@ public class CraftManager {
         setUpQuickPick();
         setUpIronPack();
         setUpGoldPack();
+        setUpMukluks();
 
     }
 
@@ -118,8 +123,9 @@ public class CraftManager {
         craftables.add(new Craftable(12, budgetPaper));
         craftables.add(new Craftable(2, fortunate));
         craftables.add(new Craftable(5, quickPick));
-        craftables.add(new Craftable(3, ironPack));
-        craftables.add(new Craftable(3, goldPack));
+        craftables.add(new Craftable(48, ironPack));
+        craftables.add(new Craftable(20, goldPack));
+        craftables.add(new Craftable(1, mukluks));
 
         return craftables;
 
@@ -251,7 +257,7 @@ public class CraftManager {
         ItemMeta fortunateMeta = fortunate.getItemMeta();
         fortunateMeta.setDisplayName(ChatColor.GREEN + "Fortunate");
         fortunateMeta.setLocalizedName("survivalShowdown.fortunate");
-        fortunateMeta.addEnchant(Enchantment.LOOT_BONUS_BLOCKS, 2, true);
+        fortunateMeta.addEnchant(Enchantment.LOOT_BONUS_BLOCKS, 3, true);
         Damageable damageable = (Damageable) fortunateMeta;
         damageable.setDamage(1559);
         fortunate.setItemMeta(fortunateMeta);
@@ -315,7 +321,7 @@ public class CraftManager {
 
     private void setUpIronPack()   {
 
-        ironPack = new ItemStack(Material.IRON_INGOT, 10);
+        ironPack = new ItemStack(Material.IRON_INGOT, 12);
         ItemMeta ironPackMeta = ironPack.getItemMeta();
         ironPackMeta.setDisplayName(ChatColor.WHITE + "Iron Ingot");
         ironPackMeta.setLocalizedName("survivalShowdown.ironPack");
@@ -353,5 +359,36 @@ public class CraftManager {
 
         Bukkit.addRecipe(goldPackRecipe);
 
+    }
+
+    private void setUpMukluks()   {
+
+        mukluks = new ItemStack(Material.DIAMOND_BOOTS);
+        ItemMeta mukluksMeta = mukluks.getItemMeta();
+        mukluksMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Mukluks");
+        mukluksMeta.setLocalizedName("survivalShowdown.mukluks");
+        mukluksMeta.addEnchant(Enchantment.DEPTH_STRIDER, 2, true);
+        mukluksMeta.addEnchant(Enchantment.DURABILITY, 3, true);
+        mukluksMeta.addEnchant(Enchantment.PROTECTION_PROJECTILE, 2, true);
+        mukluks.setItemMeta(mukluksMeta);
+
+        ShapedRecipe mukluksRecipe = new ShapedRecipe(new NamespacedKey(survivalShowdown, "mukluks"), mukluks);
+        mukluksRecipe.shape(
+                " W ",
+                "WBW",
+                " F ");
+
+        ItemStack bottle = new ItemStack(Material.POTION, 1);
+        ItemMeta meta = bottle.getItemMeta();
+        PotionMeta pmeta = (PotionMeta) meta;
+        PotionData pdata = new PotionData(PotionType.WATER);
+        pmeta.setBasePotionData(pdata);
+        bottle.setItemMeta(meta);
+
+        mukluksRecipe.setIngredient('B', Material.DIAMOND_BOOTS);
+        mukluksRecipe.setIngredient('W', bottle);
+        mukluksRecipe.setIngredient('F', Material.FISHING_ROD);
+
+        Bukkit.addRecipe(mukluksRecipe);
     }
 }

@@ -91,7 +91,7 @@ public class Game extends BukkitRunnable {
         lobby.sendMessage(ChatColor.translateAlternateColorCodes('&', "&a&l-----------------------------------------------"));
 
         // start the timer for Arena Fight
-        runTaskLater(survivalShowdown, 1200);
+        runTaskLater(survivalShowdown, 36000);
 
         gameScoreboard = new GameScoreboard(this);
         playerList.forEach(player -> player.setScoreboard(gameScoreboard.getBoard()));

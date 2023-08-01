@@ -35,6 +35,7 @@ public enum InstanceManager {
         this.survivalShowdown = survivalShowdown;
 
         register();
+        worldManager.unloadDefaultWorlds();
 
     }
 

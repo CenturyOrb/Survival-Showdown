@@ -63,6 +63,13 @@ public class WorldManager {
 
     }
 
+    public void unloadDefaultWorlds()   {
+
+        mvWorldManager.unloadWorld("Hub_nether");
+        mvWorldManager.unloadWorld("Hub_the_end");
+
+    }
+
     /**
      * deletes arena and lobby copy worlds
      */
