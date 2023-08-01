@@ -108,6 +108,7 @@ public class Game extends BukkitRunnable {
         gameState = GameState.ARENA;
         playerList.get(0).teleport(player1ArenaLocation);
         playerList.get(1).teleport(player2ArenaLocation);
+        playerList.forEach(player -> player.getActivePotionEffects().forEach(potionEffect -> player.removePotionEffect(potionEffect.getType())));
         gameScoreboard.getBoard().clearSlot(DisplaySlot.SIDEBAR);
         lobby.sendTitle(ChatColor.RED + "FINAL FIGHT", "");
 
