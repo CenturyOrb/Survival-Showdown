@@ -119,7 +119,6 @@ public class Game extends BukkitRunnable {
     public void nextRound(Player player)   {
 
         // teleport players to their locations in the arena
-        playerList.forEach(playerX -> playerX.spigot().respawn());
         playerList.get(0).teleport(player1ArenaLocation);
         playerList.get(1).teleport(player2ArenaLocation);
         // update score

@@ -120,7 +120,8 @@ public class WorldManager {
 
         for (int i = 0; i < lobbyNum; i++)   {
             mvWorldManager.cloneWorld(configManager.getArenaExampleName(), getArenaWorldName(i));
-            mvWorldManager.getMVWorld(configManager.getArenaExampleName()).setKeepSpawnInMemory(true);
+            mvWorldManager.getMVWorld(getArenaWorldName(i)).setKeepSpawnInMemory(true);
+            Bukkit.getWorld(getArenaWorldName(i)).setGameRuleValue("doImmediateRespawn", "true");
         }
         mvWorldManager.unloadWorld(configManager.getArenaExampleName());
 

@@ -27,13 +27,12 @@ public class PlayerDeathInArenaEvent implements Listener {
         Bukkit.broadcastMessage("hi someone died");
         Bukkit.broadcastMessage(gameManager.getPlayerGame(player).toString());
         if (gameManager.getPlayerGame(player) != null)   {
-            player.setGameMode(GameMode.SPECTATOR);
             Bukkit.broadcastMessage("hi u died");
             Game game = gameManager.getPlayerGame(player);
             game.nextRound(player);
-            player.setGameMode(GameMode.SURVIVAL);
         }
 
     }
+    
 
 }

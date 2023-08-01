@@ -35,6 +35,7 @@ public class CraftManager {
     private ItemStack budgetAnvil;
     private ItemStack quickPick;
     private ItemStack fortunate;
+    private ItemStack ironPack;
     private ItemStack multiTool;
     private ItemStack starterSword;
 
