@@ -33,6 +33,7 @@ public class CraftManager {
     private ItemStack avidity;
     private ItemStack budgetPaper;
     private ItemStack budgetAnvil;
+    private ItemStack quickPick;
     private ItemStack fortunate;
     private ItemStack multiTool;
     private ItemStack starterSword;
@@ -51,6 +52,7 @@ public class CraftManager {
         setUpBudgetAnvil();
         setUpBudgetPaper();
         setUpFortunate();
+        setUpQuickPick();
 
     }
 
@@ -111,6 +113,7 @@ public class CraftManager {
         craftables.add(new Craftable(4, budgetAnvil));
         craftables.add(new Craftable(12, budgetPaper));
         craftables.add(new Craftable(2, fortunate));
+        craftables.add(new Craftable(5, quickPick));
 
         return craftables;
 
@@ -213,6 +216,29 @@ public class CraftManager {
 
     }
 
+    private void setUpQuickPick()   {
+
+        quickPick = new ItemStack(Material.IRON_PICKAXE);
+        ItemMeta quickPickMeta = quickPick.getItemMeta();
+        quickPickMeta.setDisplayName(ChatColor.GOLD + "Quick Pick");
+        quickPickMeta.setLocalizedName("survivalShowdown.quickPick");
+        quickPickMeta.addEnchant(Enchantment.DIG_SPEED, 2, true);
+        quickPick.setItemMeta(quickPickMeta);
+
+        ShapedRecipe quickPickRecipe = new ShapedRecipe(new NamespacedKey(survivalShowdown, "quickPick"), quickPick);
+        quickPickRecipe.shape(
+                "III",
+                "CSC",
+                " S ");
+
+        quickPickRecipe.setIngredient('I', Material.RAW_IRON);
+        quickPickRecipe.setIngredient('S', Material.STICK);
+        quickPickRecipe.setIngredient('C', Material.COAL);
+
+        Bukkit.addRecipe(quickPickRecipe);
+
+    }
+
     private void setUpFortunate()   {
 
         fortunate = new ItemStack(Material.DIAMOND_PICKAXE);
@@ -230,8 +256,8 @@ public class CraftManager {
                 "LSL",
                 " S ");
 
-        fortunateRecipe.setIngredient('G', Material.GOLD_ORE);
-        fortunateRecipe.setIngredient('I', Material.IRON_ORE);
+        fortunateRecipe.setIngredient('G', Material.RAW_GOLD);
+        fortunateRecipe.setIngredient('I', Material.RAW_IRON);
         fortunateRecipe.setIngredient('L', Material.LAPIS_BLOCK);
         fortunateRecipe.setIngredient('S', Material.STICK);
 
