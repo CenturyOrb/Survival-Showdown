@@ -119,8 +119,6 @@ public class Game extends BukkitRunnable {
     public void nextRound(Player player)   {
 
         // teleport players to their locations in the arena
-        playerList.get(0).teleport(player1ArenaLocation);
-        playerList.get(1).teleport(player2ArenaLocation);
         // update score
         if (playerList.get(0) == player)   {
             player1Score++;

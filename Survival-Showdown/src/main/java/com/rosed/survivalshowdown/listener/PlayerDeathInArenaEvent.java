@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
 
 public class PlayerDeathInArenaEvent implements Listener {
 
@@ -25,7 +26,6 @@ public class PlayerDeathInArenaEvent implements Listener {
 
         Player player = e.getPlayer();
         Bukkit.broadcastMessage("hi someone died");
-        Bukkit.broadcastMessage(gameManager.getPlayerGame(player).toString());
         if (gameManager.getPlayerGame(player) != null)   {
             Bukkit.broadcastMessage("hi u died");
             Game game = gameManager.getPlayerGame(player);
@@ -33,6 +33,21 @@ public class PlayerDeathInArenaEvent implements Listener {
         }
 
     }
-    
+
+    @EventHandler
+    public void onPlayerRespawn(PlayerRespawnEvent e)   {
+
+        Player player = e.getPlayer();
+        if (gameManager.getPlayerGame(player) != null)   {
+            Bukkit.broadcastMessage("hi u respawned");
+            Game game = gameManager.getPlayerGame(player);
+            if (game.getPlayerList().get(0) == player)   {
+                e.setRespawnLocation(game.getPlayer1ArenaLocation());
+            } else {
+                e.setRespawnLocation(game.getPlayer2ArenaLocation());
+            }
+        }
+
+    }
 
 }
