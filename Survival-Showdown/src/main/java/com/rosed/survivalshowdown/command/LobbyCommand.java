@@ -65,7 +65,7 @@ public class LobbyCommand implements CommandExecutor {
                         player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c(&l&6!&c) You can not leave during countdown!"));
                     } else {
                         lobbyManager.getLobbyList().get(lobbyManager.getPlayerLobby(player).getLobbyID()).removePlayerFromLobby(player);
-                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&aYou have left &6lobby" + lobbyID));
+                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&aYou have left &6lobby " + lobbyID));
                     }
 
                 }

@@ -25,9 +25,7 @@ public class PlayerDeathInArenaEvent implements Listener {
     public void onPlayerDeath(PlayerDeathEvent e)   {
 
         Player player = e.getPlayer();
-        Bukkit.broadcastMessage("hi someone died");
         if (gameManager.getPlayerGame(player) != null)   {
-            Bukkit.broadcastMessage("hi u died");
             Game game = gameManager.getPlayerGame(player);
             game.nextRound(player);
         }
@@ -39,7 +37,6 @@ public class PlayerDeathInArenaEvent implements Listener {
 
         Player player = e.getPlayer();
         if (gameManager.getPlayerGame(player) != null)   {
-            Bukkit.broadcastMessage("hi u respawned");
             Game game = gameManager.getPlayerGame(player);
             if (game.getPlayerList().get(0) == player)   {
                 e.setRespawnLocation(game.getPlayer1ArenaLocation());

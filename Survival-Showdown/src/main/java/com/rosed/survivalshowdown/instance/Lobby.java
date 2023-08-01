@@ -68,6 +68,10 @@ public class Lobby {
 
         playerList.remove(player);
         craftManager.getCraftableMap().remove(player);
+        // clear their inventory, effects, experience
+        player.getActivePotionEffects().forEach(potionEffect -> player.removePotionEffect(potionEffect.getType()));
+        player.getInventory().clear();
+        player.setExp(0f);
         player.teleport(configManager.getLocation("hub", configManager.getConfig().getString("hub.world")));
 
     }

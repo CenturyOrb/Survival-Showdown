@@ -36,6 +36,7 @@ public class CraftManager {
     private ItemStack quickPick;
     private ItemStack fortunate;
     private ItemStack ironPack;
+    private ItemStack goldPack;
     private ItemStack multiTool;
     private ItemStack starterSword;
 
@@ -54,6 +55,8 @@ public class CraftManager {
         setUpBudgetPaper();
         setUpFortunate();
         setUpQuickPick();
+        setUpIronPack();
+        setUpGoldPack();
 
     }
 
@@ -115,6 +118,8 @@ public class CraftManager {
         craftables.add(new Craftable(12, budgetPaper));
         craftables.add(new Craftable(2, fortunate));
         craftables.add(new Craftable(5, quickPick));
+        craftables.add(new Craftable(3, ironPack));
+        craftables.add(new Craftable(3, goldPack));
 
         return craftables;
 
@@ -305,6 +310,48 @@ public class CraftManager {
         budgetPaperRecipe.setIngredient('S', Material.SUGAR_CANE);
 
         Bukkit.addRecipe(budgetPaperRecipe);
+
+    }
+
+    private void setUpIronPack()   {
+
+        ironPack = new ItemStack(Material.IRON_INGOT, 10);
+        ItemMeta ironPackMeta = ironPack.getItemMeta();
+        ironPackMeta.setDisplayName(ChatColor.WHITE + "Iron Ingot");
+        ironPackMeta.setLocalizedName("survivalShowdown.ironPack");
+        ironPack.setItemMeta(ironPackMeta);
+
+        ShapedRecipe ironPackRecipe = new ShapedRecipe(new NamespacedKey(survivalShowdown, "ironPack"), ironPack);
+        ironPackRecipe.shape(
+                "III",
+                "ICI",
+                "III");
+
+        ironPackRecipe.setIngredient('C', Material.COAL);
+        ironPackRecipe.setIngredient('I', Material.RAW_IRON);
+
+        Bukkit.addRecipe(ironPackRecipe);
+
+    }
+
+    private void setUpGoldPack()   {
+
+        goldPack = new ItemStack(Material.GOLD_INGOT, 10);
+        ItemMeta goldPackMeta = ironPack.getItemMeta();
+        goldPackMeta.setDisplayName(ChatColor.WHITE + "Gold Ingot");
+        goldPackMeta.setLocalizedName("survivalShowdown.goldPack");
+        goldPack.setItemMeta(goldPackMeta);
+
+        ShapedRecipe goldPackRecipe = new ShapedRecipe(new NamespacedKey(survivalShowdown, "goldPack"), goldPack);
+        goldPackRecipe.shape(
+                "GGG",
+                "GCG",
+                "GGG");
+
+        goldPackRecipe.setIngredient('C', Material.COAL);
+        goldPackRecipe.setIngredient('G', Material.RAW_GOLD);
+
+        Bukkit.addRecipe(goldPackRecipe);
 
     }
 }

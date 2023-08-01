@@ -6,10 +6,7 @@ import com.rosed.survivalshowdown.manager.ConfigManager;
 import com.rosed.survivalshowdown.manager.InstanceManager;
 import com.rosed.survivalshowdown.manager.WorldManager;
 import lombok.Getter;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
@@ -118,17 +115,22 @@ public class Game extends BukkitRunnable {
 
     public void nextRound(Player player)   {
 
-        // teleport players to their locations in the arena
         // update score
         if (playerList.get(0) == player)   {
-            player1Score++;
-            if (player1Score == 3)   {
-                end();
-            }
-        } else {
+            playerList.get(1).teleport(player2ArenaLocation);
             player2Score++;
             if (player2Score == 3)   {
-                end();
+                end(playerList.get(1));
+            }else {
+                lobby.sendTitle(ChatColor.RED.toString() + player1Score + " - " + ChatColor.GREEN + player2Score, "");
+            }
+        } else {
+            playerList.get(0).teleport(player1ArenaLocation);
+            player1Score++;
+            if (player1Score == 3)   {
+                end(playerList.get(0));
+            } else {
+                lobby.sendTitle(ChatColor.GREEN.toString() + player1Score + ChatColor.RED + " - " + player2Score, "");
             }
         }
 
@@ -137,14 +139,23 @@ public class Game extends BukkitRunnable {
     /**
      * ends the game
      */
-    public void end()   {
+    public void end(Player player)   {
 
-        Bukkit.broadcastMessage("havent added end phase yet");
-        // remove players from lobby playerlist
+        lobby.sendTitle(ChatColor.GREEN + player.getName() + " WINS!", ChatColor.GOLD.toString() + player1Score + " - " +player2Score);
+        // display winner, turn players into creative mode for 7 seconds
+        playerList.forEach(playerX -> playerX.setGameMode(GameMode.CREATIVE));
+        Bukkit.getScheduler().runTaskLater(InstanceManager.INSTANCE.getSurvivalShowdown(), new Runnable() {
+            @Override
+            public void run() {
+                playerList.forEach(playerX -> playerX.setGameMode(GameMode.SURVIVAL));
+                for (int i = playerList.size() - 1; i > -1; i--)   {
+                    lobby.removePlayerFromLobby(playerList.get(i));
+                }
+            }
+        }, 140L);
         // delete live worlds
         // reset Arena world
         // teleport players to Hub
-        // clear their inventory, effects, experience
 
     }
 

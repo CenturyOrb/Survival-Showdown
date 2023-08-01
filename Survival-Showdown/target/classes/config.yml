@@ -14,12 +14,12 @@
   # ----------------------------------
   # Hub spawn location
   hub:
-    world: 'world'
-    x: -200
-    y: 63
-    z: 568
+    world: 'Hub'
+    x: 10
+    y: 67
+    z: 10
     pitch: 0
-    yaw: 0
+    yaw: 179
 
   # ----------------------------------
   # Name of the Example worlds
