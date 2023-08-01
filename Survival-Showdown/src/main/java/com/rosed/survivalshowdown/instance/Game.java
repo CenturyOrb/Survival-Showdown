@@ -43,6 +43,8 @@ public class Game extends BukkitRunnable {
     private GameScoreboard gameScoreboard;
     private List<PotionEffect> livePotions;
     private ItemStack[] stoneKit;
+    private int player1Score = 0;
+    private int player2Score = 0;
 
     public Game(Lobby lobby)   {
 
@@ -92,7 +94,7 @@ public class Game extends BukkitRunnable {
         lobby.sendMessage(ChatColor.translateAlternateColorCodes('&', "&a&l-----------------------------------------------"));
 
         // start the timer for Arena Fight
-        runTaskLater(survivalShowdown, 6000);
+        runTaskLater(survivalShowdown, 1200);
 
         gameScoreboard = new GameScoreboard(this);
         playerList.forEach(player -> player.setScoreboard(gameScoreboard.getBoard()));
@@ -114,15 +116,38 @@ public class Game extends BukkitRunnable {
 
     }
 
+    public void nextRound(Player player)   {
+
+        // teleport players to their locations in the arena
+        playerList.forEach(playerX -> playerX.spigot().respawn());
+        playerList.get(0).teleport(player1ArenaLocation);
+        playerList.get(1).teleport(player2ArenaLocation);
+        // update score
+        if (playerList.get(0) == player)   {
+            player1Score++;
+            if (player1Score == 3)   {
+                end();
+            }
+        } else {
+            player2Score++;
+            if (player2Score == 3)   {
+                end();
+            }
+        }
+
+    }
+
     /**
      * ends the game
      */
     public void end()   {
 
+        Bukkit.broadcastMessage("havent added end phase yet");
         // remove players from lobby playerlist
         // delete live worlds
         // reset Arena world
         // teleport players to Hub
+        // clear their inventory, effects, experience
 
     }
 

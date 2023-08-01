@@ -1,9 +1,6 @@
 package com.rosed.survivalshowdown.instance;
 
-import com.rosed.survivalshowdown.manager.ConfigManager;
-import com.rosed.survivalshowdown.manager.CraftManager;
-import com.rosed.survivalshowdown.manager.InstanceManager;
-import com.rosed.survivalshowdown.manager.WorldManager;
+import com.rosed.survivalshowdown.manager.*;
 import lombok.Getter;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -17,6 +14,7 @@ public class Lobby {
     private final ConfigManager configManager;
     private final WorldManager worldManager;
     private final CraftManager craftManager;
+    private final GameManager gameManager;
 
     private final int lobbyID;
     private List<Player> playerList;
@@ -30,11 +28,13 @@ public class Lobby {
         configManager = InstanceManager.INSTANCE.getConfigManager();
         worldManager = InstanceManager.INSTANCE.getWorldManager();
         craftManager = InstanceManager.INSTANCE.getCraftManager();
+        gameManager = InstanceManager.INSTANCE.getGameManager();
 
         this.lobbyID = lobbyID;
         playerList = new ArrayList<>();
         setLobbyLocation();
         game = new Game(this);
+        gameManager.getGameList().add(game);
         this.lobbyCountdown = new LobbyCountdown(this);
 
         System.out.println("Lobby: " + lobbyID + " is loaded");

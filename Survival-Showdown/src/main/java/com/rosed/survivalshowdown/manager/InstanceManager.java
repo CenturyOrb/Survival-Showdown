@@ -6,10 +6,7 @@ import com.rosed.survivalshowdown.SurvivalShowdown;
 import com.rosed.survivalshowdown.command.CreateWorldCommand;
 import com.rosed.survivalshowdown.command.LobbyCommand;
 import com.rosed.survivalshowdown.command.WorldInfoCommand;
-import com.rosed.survivalshowdown.listener.DiamondBreakEvent;
-import com.rosed.survivalshowdown.listener.FishingRodPullEvent;
-import com.rosed.survivalshowdown.listener.FortunateRepairEvent;
-import com.rosed.survivalshowdown.listener.PlayerCraftEvent;
+import com.rosed.survivalshowdown.listener.*;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Fish;
@@ -66,8 +63,8 @@ public enum InstanceManager {
         mvWorldManager = mvCore.getMVWorldManager();
         worldManager = new WorldManager();
         craftManager = new CraftManager();
-        lobbyManager = new LobbyManager();
         gameManager = new GameManager();
+        lobbyManager = new LobbyManager();
 
         // register commands
         survivalShowdown.getCommand("lobby").setExecutor(new LobbyCommand());
@@ -79,6 +76,7 @@ public enum InstanceManager {
         Bukkit.getPluginManager().registerEvents(new DiamondBreakEvent(), survivalShowdown);
         Bukkit.getPluginManager().registerEvents(new FishingRodPullEvent(), survivalShowdown);
         Bukkit.getPluginManager().registerEvents(new FortunateRepairEvent(), survivalShowdown);
+        Bukkit.getPluginManager().registerEvents(new PlayerDeathInArenaEvent(), survivalShowdown);
 
     }
 }
