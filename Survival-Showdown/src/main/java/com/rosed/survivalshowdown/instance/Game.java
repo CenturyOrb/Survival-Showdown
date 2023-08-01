@@ -14,6 +14,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -41,7 +42,7 @@ public class Game extends BukkitRunnable {
     private Location player1ArenaLocation, player2ArenaLocation;
     private GameScoreboard gameScoreboard;
     private List<PotionEffect> livePotions;
-    private Inventory liveInventory;
+    private ItemStack[] stoneKit;
 
     public Game(Lobby lobby)   {
 
@@ -56,6 +57,7 @@ public class Game extends BukkitRunnable {
 
         setPlayerArenaLocations();
         setUpLivePotions();
+        setUpLiveInventory();
 
         System.out.println("Game: " + gameID + " is loaded");
 
@@ -76,6 +78,7 @@ public class Game extends BukkitRunnable {
                 MultiverseWorld mvWorld = worldManager.getLivePlayerWorldMap().get(player).get(0);
                 player.teleport(mvWorld.getSpawnLocation());
                 player.addPotionEffects(livePotions);
+                player.getInventory().setContents(stoneKit);
             }
         }
 
@@ -140,17 +143,38 @@ public class Game extends BukkitRunnable {
         livePotions = new ArrayList<>();
         livePotions.add(new PotionEffect(PotionEffectType.SATURATION, Integer.MAX_VALUE, 3, true, false));
         livePotions.add(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, Integer.MAX_VALUE, 0, true, false));
-        livePotions.add(new PotionEffect(PotionEffectType.FAST_DIGGING, Integer.MAX_VALUE, 1, true, false));
+        livePotions.add(new PotionEffect(PotionEffectType.FAST_DIGGING, Integer.MAX_VALUE, 0, true, false));
         livePotions.add(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0, true, false));
 
     }
 
-    private void setUpLiveKit()   {
+    private void setUpLiveInventory()   {
 
-        liveInventory = Bukkit.createInventory(null, InventoryType.PLAYER);
-        liveInventory.addItem(new ItemStack(Material.STONE_SWORD));
-        ItemMeta stoneToolMeta = new ItemStack(Material.IRON_PICKAXE).getItemMeta();
-        stoneToolMeta.addEnchant(Enchantment.DIG_SPEED, 2, true);
+        stoneKit = new ItemStack[4];
+
+        ItemStack stoneSword = new ItemStack(Material.STONE_SWORD);
+        ItemMeta stoneSwordMeta = stoneSword.getItemMeta();
+        stoneSwordMeta.addEnchant(Enchantment.ARROW_DAMAGE, 0, true);
+        stoneSwordMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        stoneSword.setItemMeta(stoneSwordMeta);
+
+        ItemMeta stoneToolMeta = new ItemStack(Material.STONE_PICKAXE).getItemMeta();
+        stoneToolMeta.addEnchant(Enchantment.DIG_SPEED, 3, true);
+        stoneToolMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+
+        ItemStack stonePickaxe = new ItemStack(Material.STONE_PICKAXE);
+        stonePickaxe.setItemMeta(stoneToolMeta);
+
+        ItemStack stoneAxe = new ItemStack(Material.STONE_AXE);
+        stoneAxe.setItemMeta(stoneToolMeta);
+
+        ItemStack stoneShovel = new ItemStack(Material.STONE_SHOVEL);
+        stoneShovel.setItemMeta(stoneToolMeta);
+
+        stoneKit[0] = stoneSword;
+        stoneKit[1] = stonePickaxe;
+        stoneKit[2] = stoneAxe;
+        stoneKit[3] = stoneShovel;
 
     }
 
