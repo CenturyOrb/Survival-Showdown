@@ -115,13 +115,6 @@ public class Lobby {
 
     public void reset(boolean kickPlayers)   {
 
-        if (kickPlayers)   {
-            Location hub = configManager.getLocation("hub", configManager.getConfig().getString("hub.world"));
-            for (Player player : playerList)   {
-                player.teleport(hub);
-            }
-        }
-
         game.setGameState(GameState.RECRUITING);
         lobbyCountdown.cancel();
         lobbyCountdown = new LobbyCountdown(this);

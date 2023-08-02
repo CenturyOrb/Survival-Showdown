@@ -6,7 +6,6 @@ import com.onarandombox.MultiverseCore.api.MultiverseWorld;
 import com.rosed.survivalshowdown.instance.Lobby;
 import lombok.Getter;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.WorldType;
 import org.bukkit.entity.Player;
@@ -104,6 +103,17 @@ public class WorldManager {
             }
         }
 
+    }
+
+    /**
+     * deletes overworld, nether and end for a game
+     */
+    public void deleteGameWorlds(Lobby lobby)   {
+
+        for (Player player : lobby.getPlayerList())   {
+            List<MultiverseWorld> mvWorldList = livePlayerWorldMap.get(player);
+            mvWorldList.forEach(multiverseWorld -> mvWorldManager.deleteWorld(multiverseWorld.getName(), true, true));
+        }
     }
 
     /**

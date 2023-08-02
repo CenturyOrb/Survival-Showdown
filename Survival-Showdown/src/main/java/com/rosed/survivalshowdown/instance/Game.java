@@ -113,6 +113,10 @@ public class Game extends BukkitRunnable {
 
     }
 
+    /**
+     * add point to winning player, end game if a player reaches 3
+     * @param player player that lost a fight
+     */
     public void nextRound(Player player)   {
 
         // update score
@@ -154,8 +158,8 @@ public class Game extends BukkitRunnable {
             }
         }, 140L);
         // delete live worlds
+        worldManager.deleteGameWorlds(lobby);
         // reset Arena world
-        // teleport players to Hub
 
     }
 
