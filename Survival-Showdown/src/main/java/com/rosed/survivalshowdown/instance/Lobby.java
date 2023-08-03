@@ -117,10 +117,8 @@ public class Lobby {
 
         // delete used live worlds
         // delete and make a new clone of arena world
-        worldManager.deleteGameWorlds(this);
         worldManager.resetArenaWorld(lobbyID);
 
-        game.setGameState(GameState.RECRUITING);
         lobbyCountdown.cancel();
         lobbyCountdown = new LobbyCountdown(this);
         game = new Game(this);

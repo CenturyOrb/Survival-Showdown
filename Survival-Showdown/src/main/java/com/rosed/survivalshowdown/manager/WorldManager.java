@@ -108,12 +108,10 @@ public class WorldManager {
     /**
      * deletes overworld, nether and end for a game
      */
-    public void deleteGameWorlds(Lobby lobby)   {
+    public void deleteGameWorlds(Player player)   {
 
-        for (Player player : lobby.getPlayerList())   {
-            List<MultiverseWorld> mvWorldList = livePlayerWorldMap.get(player);
-            mvWorldList.forEach(multiverseWorld -> mvWorldManager.deleteWorld(multiverseWorld.getName(), true, true));
-        }
+        List<MultiverseWorld> mvWorldList = livePlayerWorldMap.get(player);
+        mvWorldList.forEach(multiverseWorld -> mvWorldManager.deleteWorld(multiverseWorld.getName(), true, true));
 
     }
 

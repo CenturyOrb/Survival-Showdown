@@ -152,6 +152,8 @@ public class Game extends BukkitRunnable {
             @Override
             public void run() {
                 playerList.forEach(playerX -> playerX.setGameMode(GameMode.SURVIVAL));
+                worldManager.deleteGameWorlds(playerList.get(0));
+                worldManager.deleteGameWorlds(playerList.get(1));
                 for (int i = playerList.size() - 1; i > -1; i--)   {
                     lobby.removePlayerFromLobby(playerList.get(i));
                 }
