@@ -155,10 +155,9 @@ public class Game extends BukkitRunnable {
                 for (int i = playerList.size() - 1; i > -1; i--)   {
                     lobby.removePlayerFromLobby(playerList.get(i));
                 }
+                lobby.reset();
             }
         }, 140L);
-        lobby.reset();
-
     }
 
     /**
