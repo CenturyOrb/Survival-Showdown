@@ -91,7 +91,7 @@ public class Game extends BukkitRunnable {
         lobby.sendMessage(ChatColor.translateAlternateColorCodes('&', "&a&l-----------------------------------------------"));
 
         // start the timer for Arena Fight
-        runTaskLater(survivalShowdown, 36000);
+        runTaskLater(survivalShowdown, 600);
 
         gameScoreboard = new GameScoreboard(this);
         playerList.forEach(player -> player.setScoreboard(gameScoreboard.getBoard()));
@@ -157,9 +157,7 @@ public class Game extends BukkitRunnable {
                 }
             }
         }, 140L);
-        // delete live worlds
-        worldManager.deleteGameWorlds(lobby);
-        // reset Arena world
+        lobby.reset();
 
     }
 

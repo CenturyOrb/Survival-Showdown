@@ -114,6 +114,7 @@ public class WorldManager {
             List<MultiverseWorld> mvWorldList = livePlayerWorldMap.get(player);
             mvWorldList.forEach(multiverseWorld -> mvWorldManager.deleteWorld(multiverseWorld.getName(), true, true));
         }
+
     }
 
     /**
@@ -141,6 +142,24 @@ public class WorldManager {
             Bukkit.getWorld(getArenaWorldName(i)).setGameRuleValue("doImmediateRespawn", "true");
         }
         mvWorldManager.unloadWorld(configManager.getArenaExampleName());
+
+    }
+
+    public void cloneArenaWorld(int lobbyID)   {
+
+        mvWorldManager.loadWorld(configManager.getArenaExampleName());
+
+        mvWorldManager.cloneWorld(configManager.getArenaExampleName(), getArenaWorldName(lobbyID));
+        Bukkit.getWorld(getArenaWorldName(lobbyID)).setGameRuleValue("keepInventory", "true");
+        Bukkit.getWorld(getArenaWorldName(lobbyID)).setGameRuleValue("doImmediateRespawn", "true");
+
+        mvWorldManager.unloadWorld(configManager.getArenaExampleName());
+
+    }
+
+    public void deleteArenaWorld(int lobbyID)   {
+
+        mvWorldManager.deleteWorld(getArenaWorldName(lobbyID));
 
     }
 
