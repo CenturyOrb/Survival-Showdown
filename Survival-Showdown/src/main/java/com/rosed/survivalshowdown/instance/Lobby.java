@@ -122,8 +122,7 @@ public class Lobby {
 
         lobbyCountdown.cancel();
         lobbyCountdown = new LobbyCountdown(this);
-        game.cancel();
-        game = null;
+        game.getGameTask().cancel();
         game = new Game(this);
         Bukkit.broadcastMessage("game to list");
     }

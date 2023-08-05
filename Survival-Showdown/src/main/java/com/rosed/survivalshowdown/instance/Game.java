@@ -20,6 +20,7 @@ import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.scoreboard.*;
 
 import java.util.ArrayList;
@@ -42,6 +43,7 @@ public class Game extends BukkitRunnable {
     private ItemStack[] stoneKit;
     private int player1Score = 0;
     private int player2Score = 0;
+    private BukkitTask gameTask;
 
     public Game(Lobby lobby)   {
 
@@ -93,7 +95,7 @@ public class Game extends BukkitRunnable {
         // start the timer for Arena Fight
         Bukkit.broadcastMessage("This ");
         Bukkit.broadcastMessage(this + "");
-        runTaskLater(survivalShowdown, 300);
+        gameTask = this.runTaskLater(survivalShowdown, 300);
 
         gameScoreboard = new GameScoreboard(this);
         playerList.forEach(player -> player.setScoreboard(gameScoreboard.getBoard()));
