@@ -2,6 +2,7 @@ package com.rosed.survivalshowdown.instance;
 
 import com.rosed.survivalshowdown.manager.*;
 import lombok.Getter;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
@@ -114,15 +115,19 @@ public class Lobby {
     }
 
     public void reset()   {
-
+        Bukkit.broadcastMessage("Hi its reset");
         // delete used live worlds
         // delete and make a new clone of arena world
         worldManager.resetArenaWorld(lobbyID);
 
         lobbyCountdown.cancel();
         lobbyCountdown = new LobbyCountdown(this);
+        gameManager.getGameList().remove(game);
+        game.cancel();
+        game = null;
         game = new Game(this);
-
+        gameManager.getGameList().add(game);
+        Bukkit.broadcastMessage("game to list");
     }
 
     /**

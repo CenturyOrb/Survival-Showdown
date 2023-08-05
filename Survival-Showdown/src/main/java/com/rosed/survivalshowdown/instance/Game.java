@@ -91,7 +91,9 @@ public class Game extends BukkitRunnable {
         lobby.sendMessage(ChatColor.translateAlternateColorCodes('&', "&a&l-----------------------------------------------"));
 
         // start the timer for Arena Fight
-        runTaskLater(survivalShowdown, 600);
+        Bukkit.broadcastMessage("This ");
+        Bukkit.broadcastMessage(this + "");
+        runTaskLater(survivalShowdown, 300);
 
         gameScoreboard = new GameScoreboard(this);
         playerList.forEach(player -> player.setScoreboard(gameScoreboard.getBoard()));
@@ -144,7 +146,6 @@ public class Game extends BukkitRunnable {
      * ends the game
      */
     public void end(Player player)   {
-
         lobby.sendTitle(ChatColor.GREEN + player.getName() + " WINS!", ChatColor.GOLD.toString() + player1Score + " - " +player2Score);
         // display winner, turn players into creative mode for 7 seconds
         playerList.forEach(playerX -> playerX.setGameMode(GameMode.CREATIVE));
