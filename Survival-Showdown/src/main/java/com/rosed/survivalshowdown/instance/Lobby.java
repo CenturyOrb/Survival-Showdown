@@ -120,10 +120,10 @@ public class Lobby {
         // delete and make a new clone of arena world
         worldManager.resetArenaWorld(lobbyID);
 
-        lobbyCountdown.cancel();
-        lobbyCountdown = new LobbyCountdown(this);
         game.getGameTask().cancel();
         game = new Game(this);
+        lobbyCountdown.cancel();
+        lobbyCountdown = new LobbyCountdown(this);
         Bukkit.broadcastMessage("game to list");
     }
 
