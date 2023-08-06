@@ -34,6 +34,7 @@ public class WorldManager {
         loadExampleWorlds();
         cloneLobbyWorlds(configManager.getNumLobby());
         cloneArenaWorlds(configManager.getNumLobby());
+        unloadWorlds();
 
     }
 
@@ -62,6 +63,9 @@ public class WorldManager {
 
     }
 
+    /**
+     * unloads the default nether and the end worlds
+     */
     public void unloadDefaultWorlds()   {
 
         mvWorldManager.unloadWorld("Hub_nether");
@@ -124,7 +128,6 @@ public class WorldManager {
         for (int i = 0; i < lobbyNum; i++)   {
             mvWorldManager.cloneWorld(configManager.getLobbyExampleName(), getLobbyWorldName(i));
         }
-        mvWorldManager.unloadWorld(configManager.getLobbyExampleName());
 
     }
 
@@ -139,22 +142,23 @@ public class WorldManager {
             Bukkit.getWorld(getArenaWorldName(i)).setGameRuleValue("keepInventory", "true");
             Bukkit.getWorld(getArenaWorldName(i)).setGameRuleValue("doImmediateRespawn", "true");
         }
-        mvWorldManager.unloadWorld(configManager.getArenaExampleName());
 
     }
 
+    /**
+     * deletes and creates new lobby worlds for a lobby/game
+     * @param lobbyID lobby id
+     */
     public void resetArenaWorld(int lobbyID)   {
 
-        Bukkit.broadcastMessage("resetarenaworld ran");
-        Bukkit.broadcastMessage(mvWorldManager.deleteWorld(getArenaWorldName(lobbyID), true, true) + " to deletign");
+        mvWorldManager.deleteWorld(getArenaWorldName(lobbyID), true, true);
+        mvWorldManager.loadWorld(configManager.getArenaExampleName());
 
-        Bukkit.broadcastMessage(mvWorldManager.loadWorld(configManager.getArenaExampleName()) + " to loading");
-
-        Bukkit.broadcastMessage(mvWorldManager.cloneWorld(configManager.getArenaExampleName(), getArenaWorldName(lobbyID)) + " to cloning");
+        mvWorldManager.cloneWorld(configManager.getArenaExampleName(), getArenaWorldName(lobbyID));
         Bukkit.getWorld(getArenaWorldName(lobbyID)).setGameRuleValue("keepInventory", "true");
         Bukkit.getWorld(getArenaWorldName(lobbyID)).setGameRuleValue("doImmediateRespawn", "true");
 
-        Bukkit.broadcastMessage(mvWorldManager.unloadWorld(configManager.getArenaExampleName()) + " to unloading");
+        mvWorldManager.unloadWorld(configManager.getArenaExampleName());
 
     }
 
@@ -178,6 +182,12 @@ public class WorldManager {
 
     }
 
+    /**
+     * creates the live worlds for a player
+     * @param player player
+     * @param stringSeed string of the world
+     * @param playerEnd ending part of the world name
+     */
     private void createPlayerLiveWorlds(Player player, String stringSeed, String playerEnd) {
 
         List<MultiverseWorld> playerMVLiveWorld = new ArrayList<>();
