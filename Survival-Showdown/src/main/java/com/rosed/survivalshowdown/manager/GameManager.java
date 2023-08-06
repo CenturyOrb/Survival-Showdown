@@ -34,7 +34,6 @@ public class GameManager {
                 return game;
             }
         }
-
         return null;
 
     }

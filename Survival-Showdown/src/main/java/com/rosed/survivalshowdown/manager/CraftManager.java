@@ -17,7 +17,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionType;
-import org.checkerframework.checker.units.qual.C;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,7 +25,7 @@ import java.util.List;
 @Getter
 public class CraftManager {
 
-    private SurvivalShowdown survivalShowdown;
+    private final SurvivalShowdown survivalShowdown;
 
     private HashMap<Player, List<Craftable>> craftableMap;
 
@@ -41,8 +40,6 @@ public class CraftManager {
     private ItemStack ironPack;
     private ItemStack goldPack;
     private ItemStack mukluks;
-    private ItemStack multiTool;
-    private ItemStack starterSword;
 
 
     public CraftManager() {
@@ -67,7 +64,6 @@ public class CraftManager {
 
     /**
      * updates the Craftable in the map
-     *
      * @param player player crafting
      * @param item   item being crafted
      * @param amount amount being crafted
@@ -88,7 +84,6 @@ public class CraftManager {
 
     /**
      * checks if an item is a Craftable item
-     *
      * @param item item
      * @return true or false if item is a craftable
      */
@@ -109,7 +104,6 @@ public class CraftManager {
 
     /**
      * gets craftable preset of a new player
-     *
      * @return return cratable preset
      */
     public List<Craftable> getCraftablePreset() {

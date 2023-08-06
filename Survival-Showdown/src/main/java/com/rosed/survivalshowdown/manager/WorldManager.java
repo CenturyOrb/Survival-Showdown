@@ -36,6 +36,8 @@ public class WorldManager {
         cloneArenaWorlds(configManager.getNumLobby());
         unloadWorlds();
 
+        unloadDefaultWorlds();
+
     }
 
     /**
