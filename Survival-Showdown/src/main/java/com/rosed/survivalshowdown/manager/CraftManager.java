@@ -40,7 +40,7 @@ public class CraftManager {
     private ItemStack ironPack;
     private ItemStack goldPack;
     private ItemStack mukluks;
-
+    private ItemStack anduril;
 
     public CraftManager() {
 
@@ -59,6 +59,7 @@ public class CraftManager {
         setUpIronPack();
         setUpGoldPack();
         setUpMukluks();
+        setUpAnduril();
 
     }
 
@@ -120,6 +121,7 @@ public class CraftManager {
         craftables.add(new Craftable(48, ironPack));
         craftables.add(new Craftable(20, goldPack));
         craftables.add(new Craftable(1, mukluks));
+        craftables.add(new Craftable(1, anduril));
 
         return craftables;
 
@@ -384,5 +386,33 @@ public class CraftManager {
         mukluksRecipe.setIngredient('F', Material.FISHING_ROD);
 
         Bukkit.addRecipe(mukluksRecipe);
+    }
+
+    private void setUpAnduril()   {
+
+        anduril = new ItemStack(Material.IRON_SWORD);
+        ItemMeta andurilMeta = avidity.getItemMeta();
+        andurilMeta.setDisplayName(ChatColor.GREEN + "Anduril");
+        andurilMeta.setLocalizedName("survivalShowdown.anduril");
+        List<String> andurilLore = new ArrayList<>();
+        andurilLore.add(ChatColor.GOLD + "While Holding:");
+        andurilLore.add(ChatColor.GREEN + "- Resistance I");
+        andurilLore.add(ChatColor.GOLD + "- Speed I");
+        andurilMeta.setLore(andurilLore);
+        andurilMeta.addEnchant(Enchantment.DAMAGE_ALL, 2, true);
+        anduril.setItemMeta(andurilMeta);
+
+        ShapedRecipe andurilRecipe = new ShapedRecipe(new NamespacedKey(survivalShowdown, "anduril"), anduril);
+        andurilRecipe.shape(
+                "FIF",
+                "FIF",
+                "FBF");
+
+        andurilRecipe.setIngredient('F', Material.FEATHER);
+        andurilRecipe.setIngredient('I', Material.IRON_BLOCK);
+        andurilRecipe.setIngredient('B', Material.BLAZE_ROD);
+
+        Bukkit.addRecipe(andurilRecipe);
+
     }
 }
