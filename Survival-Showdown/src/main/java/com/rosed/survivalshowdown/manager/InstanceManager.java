@@ -9,7 +9,6 @@ import com.rosed.survivalshowdown.command.WorldInfoCommand;
 import com.rosed.survivalshowdown.listener.*;
 import lombok.Getter;
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Fish;
 
 @Getter
 public enum InstanceManager {
@@ -77,6 +76,7 @@ public enum InstanceManager {
         Bukkit.getPluginManager().registerEvents(new FishingRodPullEvent(), survivalShowdown);
         Bukkit.getPluginManager().registerEvents(new FortunateRepairEvent(), survivalShowdown);
         Bukkit.getPluginManager().registerEvents(new PlayerDeathInArenaEvent(), survivalShowdown);
+        Bukkit.getPluginManager().registerEvents(new CustomItemHitEvent(), survivalShowdown);
 
     }
 }
