@@ -76,7 +76,7 @@ public enum InstanceManager {
         Bukkit.getPluginManager().registerEvents(new FishingRodPullEvent(), survivalShowdown);
         Bukkit.getPluginManager().registerEvents(new FortunateRepairEvent(), survivalShowdown);
         Bukkit.getPluginManager().registerEvents(new PlayerDeathInArenaEvent(), survivalShowdown);
-        Bukkit.getPluginManager().registerEvents(new CustomItemHitEvent(), survivalShowdown);
+        new AndurilHold(survivalShowdown);
 
     }
 }
