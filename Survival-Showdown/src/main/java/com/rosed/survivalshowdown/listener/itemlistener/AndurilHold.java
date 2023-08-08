@@ -1,5 +1,6 @@
 package com.rosed.survivalshowdown.listener.itemlistener;
 
+import com.rosed.survivalshowdown.util.ItemUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -8,7 +9,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-public class AndurilHold {
+public class AndurilHold extends ItemUtil {
 
     JavaPlugin plugin;
 
@@ -30,22 +31,6 @@ public class AndurilHold {
                 }
             }
         }, 0, 20);
-
-    }
-
-    /**
-     * item is the correct item
-     * @param item item to check
-     * @param localizedNameChecker correct localized name
-     */
-    private boolean itemCheck(ItemStack item, String localizedNameChecker)   {
-
-        if (item == null)   return false;
-        if (item.getItemMeta() == null)   return false;
-        if (!item.getItemMeta().hasLocalizedName())   return false;
-        String localizedName = item.getItemMeta().getLocalizedName();
-
-        return localizedName.equals(localizedNameChecker);
 
     }
 

@@ -9,6 +9,7 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.Damageable;
@@ -17,7 +18,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionType;
-import org.checkerframework.checker.units.qual.C;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,6 +43,7 @@ public class CraftManager {
     private ItemStack mukluks;
     private ItemStack anduril;
     private ItemStack apprenticeHelm;
+    private ItemStack exodus;
 
     public CraftManager() {
 
@@ -63,6 +64,7 @@ public class CraftManager {
         setUpMukluks();
         setUpAnduril();
         setUpApprenticeHelm();
+        setUpExodus();
 
     }
 
@@ -126,6 +128,7 @@ public class CraftManager {
         craftables.add(new Craftable(1, mukluks));
         craftables.add(new Craftable(1, anduril));
         craftables.add(new Craftable(1, apprenticeHelm));
+        craftables.add(new Craftable(1, exodus));
 
         return craftables;
 
@@ -442,6 +445,34 @@ public class CraftManager {
         apprenticeHelmRecipe.setIngredient('I', Material.IRON_INGOT);
 
         Bukkit.addRecipe(apprenticeHelmRecipe);
+
+    }
+
+    private void setUpExodus()   {
+
+        exodus = new ItemStack(Material.DIAMOND_HELMET);
+        ItemMeta exodusMeta = exodus.getItemMeta();
+        exodusMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Exodus");
+        exodusMeta.setLocalizedName("survivalShowdown.exodus");
+        exodusMeta.addEnchant(Enchantment.DIG_SPEED, 1, true);
+        exodusMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        List<String> exodusLore = new ArrayList<>();
+        exodusLore.add(ChatColor.GOLD + "While Wearing:");
+        exodusLore.add(ChatColor.GREEN + "- Regeneration on hit");
+        exodusMeta.setLore(exodusLore);
+        exodus.setItemMeta(exodusMeta);
+
+        ShapedRecipe exodusRecipe = new ShapedRecipe(new NamespacedKey(survivalShowdown, "exodus"), exodus);
+        exodusRecipe.shape(
+                "DDD",
+                "DGD",
+                "E E");
+
+        exodusRecipe.setIngredient('D', Material.DIAMOND);
+        exodusRecipe.setIngredient('G', Material.GOLDEN_APPLE);
+        exodusRecipe.setIngredient('E', Material.EMERALD);
+
+        Bukkit.addRecipe(exodusRecipe);
 
     }
 }
