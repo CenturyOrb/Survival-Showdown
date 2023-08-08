@@ -1,4 +1,4 @@
-package com.rosed.survivalshowdown.listener;
+package com.rosed.survivalshowdown.listener.itemlistener;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

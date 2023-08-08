@@ -17,6 +17,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionType;
+import org.checkerframework.checker.units.qual.C;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,6 +42,7 @@ public class CraftManager {
     private ItemStack goldPack;
     private ItemStack mukluks;
     private ItemStack anduril;
+    private ItemStack apprenticeHelm;
 
     public CraftManager() {
 
@@ -60,6 +62,7 @@ public class CraftManager {
         setUpGoldPack();
         setUpMukluks();
         setUpAnduril();
+        setUpApprenticeHelm();
 
     }
 
@@ -122,6 +125,7 @@ public class CraftManager {
         craftables.add(new Craftable(20, goldPack));
         craftables.add(new Craftable(1, mukluks));
         craftables.add(new Craftable(1, anduril));
+        craftables.add(new Craftable(1, apprenticeHelm));
 
         return craftables;
 
@@ -397,7 +401,7 @@ public class CraftManager {
         List<String> andurilLore = new ArrayList<>();
         andurilLore.add(ChatColor.GOLD + "While Holding:");
         andurilLore.add(ChatColor.GREEN + "- Resistance I");
-        andurilLore.add(ChatColor.GOLD + "- Speed I");
+        andurilLore.add(ChatColor.GREEN + "- Speed I");
         andurilMeta.setLore(andurilLore);
         andurilMeta.addEnchant(Enchantment.DAMAGE_ALL, 2, true);
         anduril.setItemMeta(andurilMeta);
@@ -413,6 +417,31 @@ public class CraftManager {
         andurilRecipe.setIngredient('B', Material.BLAZE_ROD);
 
         Bukkit.addRecipe(andurilRecipe);
+
+    }
+
+    private void setUpApprenticeHelm()   {
+
+        apprenticeHelm = new ItemStack(Material.IRON_HELMET);
+        ItemMeta apprenticeHelmMeta = apprenticeHelm.getItemMeta();
+        apprenticeHelmMeta.setDisplayName(ChatColor.GREEN + "Apprentice Helm");
+        apprenticeHelmMeta.setLocalizedName("survivalShowdown.apprenticeHelm");
+        apprenticeHelmMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
+        apprenticeHelmMeta.addEnchant(Enchantment.PROTECTION_FIRE, 1, true);
+        apprenticeHelmMeta.addEnchant(Enchantment.PROTECTION_EXPLOSIONS, 1, true);
+        apprenticeHelmMeta.addEnchant(Enchantment.PROTECTION_PROJECTILE, 1, true);
+        apprenticeHelm.setItemMeta(apprenticeHelmMeta);
+
+        ShapedRecipe apprenticeHelmRecipe = new ShapedRecipe(new NamespacedKey(survivalShowdown, "apprenticeHelm"), apprenticeHelm);
+        apprenticeHelmRecipe.shape(
+                "III",
+                "IRI",
+                "   ");
+
+        apprenticeHelmRecipe.setIngredient('R', Material.REDSTONE_TORCH);
+        apprenticeHelmRecipe.setIngredient('I', Material.IRON_INGOT);
+
+        Bukkit.addRecipe(apprenticeHelmRecipe);
 
     }
 }
