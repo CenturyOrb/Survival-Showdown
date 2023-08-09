@@ -18,6 +18,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionType;
+import org.checkerframework.checker.units.qual.C;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,6 +48,7 @@ public class CraftManager {
     private ItemStack tarnhelm;
     private ItemStack netherArtifact;
     private ItemStack hermesBoots;
+    private ItemStack deathsScythe;
 
     public CraftManager() {
 
@@ -71,6 +73,7 @@ public class CraftManager {
         setUpTarnhelm();
         setUpNetherArtifact();
         setUpHermesBoots();
+        setUpDeathsScythe();
 
     }
 
@@ -138,6 +141,7 @@ public class CraftManager {
         craftables.add(new Craftable(1, tarnhelm));
         craftables.add(new Craftable(2, netherArtifact));
         craftables.add(new Craftable(1, hermesBoots));
+        craftables.add(new Craftable(1, deathsScythe));
 
         return craftables;
 
@@ -560,6 +564,36 @@ public class CraftManager {
         hermesBootsRecipe.setIngredient('F', Material.FEATHER);
 
         Bukkit.addRecipe(hermesBootsRecipe);
+
+    }
+
+    private void setUpDeathsScythe()   {
+
+        deathsScythe = new ItemStack(Material.IRON_HOE);
+        ItemMeta deathsScytheMeta = deathsScythe.getItemMeta();
+        deathsScytheMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Death's Scythe");
+        deathsScytheMeta.setLocalizedName("survivalShowdown.deathsScythe");
+        Damageable damageable = (Damageable) deathsScytheMeta;
+        damageable.setDamage(245);
+        List<String> deathsScytheLore = new ArrayList<>();
+        deathsScytheLore.add(ChatColor.GOLD + "On Hit:");
+        deathsScytheLore.add(ChatColor.GREEN + "- Deal 20% of target current hp");
+        deathsScytheLore.add(ChatColor.GREEN + "- Heal 25% of damage dealt");
+        deathsScytheMeta.setLore(deathsScytheLore);
+        deathsScythe.setItemMeta(deathsScytheMeta);
+
+        ShapedRecipe deathsScytheRecipe = new ShapedRecipe(new NamespacedKey(survivalShowdown, "deathsScythe"), deathsScythe);
+        deathsScytheRecipe.shape(
+                "IIL",
+                " BC",
+                "B  ");
+
+        deathsScytheRecipe.setIngredient('B', Material.BONE);
+        deathsScytheRecipe.setIngredient('L', Material.LAPIS_BLOCK);
+        deathsScytheRecipe.setIngredient('I', Material.IRON_INGOT);
+        deathsScytheRecipe.setIngredient('C', Material.CLOCK);
+
+        Bukkit.addRecipe(deathsScytheRecipe);
 
     }
 
