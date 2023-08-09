@@ -1,7 +1,6 @@
 package com.rosed.survivalshowdown.listener.itemlistener;
 
 import com.rosed.survivalshowdown.util.ItemUtil;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -10,7 +9,6 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import java.util.HashMap;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ExodusWear extends ItemUtil implements Listener {
 

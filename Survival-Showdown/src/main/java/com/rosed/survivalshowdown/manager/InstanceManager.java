@@ -9,6 +9,7 @@ import com.rosed.survivalshowdown.command.WorldInfoCommand;
 import com.rosed.survivalshowdown.listener.*;
 import com.rosed.survivalshowdown.listener.itemlistener.AndurilHold;
 import com.rosed.survivalshowdown.listener.itemlistener.ExodusWear;
+import com.rosed.survivalshowdown.listener.itemlistener.HermesBootsWear;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 
@@ -78,7 +79,8 @@ public enum InstanceManager {
         Bukkit.getPluginManager().registerEvents(new FishingRodPullEvent(), survivalShowdown);
         Bukkit.getPluginManager().registerEvents(new FortunateRepairEvent(), survivalShowdown);
         Bukkit.getPluginManager().registerEvents(new PlayerDeathInArenaEvent(), survivalShowdown);
-        new AndurilHold(survivalShowdown);
+        new AndurilHold();
+        new HermesBootsWear();
         Bukkit.getPluginManager().registerEvents(new ExodusWear(), survivalShowdown);
 
     }
