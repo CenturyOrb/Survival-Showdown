@@ -46,6 +46,7 @@ public class CraftManager {
     private ItemStack exodus;
     private ItemStack tarnhelm;
     private ItemStack netherArtifact;
+    private ItemStack hermesBoots;
 
     public CraftManager() {
 
@@ -69,6 +70,7 @@ public class CraftManager {
         setUpExodus();
         setUpTarnhelm();
         setUpNetherArtifact();
+        setUpHermesBoots();
 
     }
 
@@ -135,6 +137,7 @@ public class CraftManager {
         craftables.add(new Craftable(1, exodus));
         craftables.add(new Craftable(1, tarnhelm));
         craftables.add(new Craftable(2, netherArtifact));
+        craftables.add(new Craftable(1, hermesBoots));
 
         return craftables;
 
@@ -528,4 +531,37 @@ public class CraftManager {
         Bukkit.addRecipe(netherArtifactRecipe);
 
     }
+
+    private void setUpHermesBoots()   {
+
+        hermesBoots = new ItemStack(Material.DIAMOND_BOOTS);
+        ItemMeta hermesBootsMeta = hermesBoots.getItemMeta();
+        hermesBootsMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Hermes' Boots");
+        hermesBootsMeta.setLocalizedName("survivalShowdown.hermesBoots");
+        hermesBootsMeta.addEnchant(Enchantment.DURABILITY, 2, true);
+        hermesBootsMeta.addEnchant(Enchantment.PROTECTION_FALL, 1, true);
+        hermesBootsMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 2, true);
+        List<String> hermesBootsLore = new ArrayList<>();
+        hermesBootsLore.add(ChatColor.GOLD + "");
+        hermesBootsLore.add(ChatColor.GOLD + "While Wearing:");
+        hermesBootsLore.add(ChatColor.GREEN + "- Speed I");
+        hermesBootsMeta.setLore(hermesBootsLore);
+        hermesBoots.setItemMeta(hermesBootsMeta);
+
+        ShapedRecipe hermesBootsRecipe = new ShapedRecipe(new NamespacedKey(survivalShowdown, "hermesBoots"), hermesBoots);
+        hermesBootsRecipe.shape(
+                "D D",
+                "PBP",
+                "F F");
+
+        hermesBootsRecipe.setIngredient('B', Material.DIAMOND_BOOTS);
+        hermesBootsRecipe.setIngredient('D', Material.DIAMOND);
+        hermesBootsRecipe.setIngredient('P', Material.BLAZE_POWDER);
+        hermesBootsRecipe.setIngredient('F', Material.FEATHER);
+
+        Bukkit.addRecipe(hermesBootsRecipe);
+
+    }
+
+
 }
