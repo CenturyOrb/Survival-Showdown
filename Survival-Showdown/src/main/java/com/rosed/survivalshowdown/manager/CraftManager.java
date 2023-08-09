@@ -45,6 +45,7 @@ public class CraftManager {
     private ItemStack apprenticeHelm;
     private ItemStack exodus;
     private ItemStack tarnhelm;
+    private ItemStack netherArtifact;
 
     public CraftManager() {
 
@@ -67,6 +68,7 @@ public class CraftManager {
         setUpApprenticeHelm();
         setUpExodus();
         setUpTarnhelm();
+        setUpNetherArtifact();
 
     }
 
@@ -132,6 +134,7 @@ public class CraftManager {
         craftables.add(new Craftable(1, apprenticeHelm));
         craftables.add(new Craftable(1, exodus));
         craftables.add(new Craftable(1, tarnhelm));
+        craftables.add(new Craftable(2, netherArtifact));
 
         return craftables;
 
@@ -501,6 +504,28 @@ public class CraftManager {
         tarnhelmRecipe.setIngredient('I', Material.IRON_INGOT);
 
         Bukkit.addRecipe(tarnhelmRecipe);
+
+    }
+
+    private void setUpNetherArtifact()   {
+
+        netherArtifact = new ItemStack(Material.BLAZE_ROD);
+        ItemMeta netherArtifactMeta = netherArtifact.getItemMeta();
+        netherArtifactMeta.setDisplayName(ChatColor.WHITE + "Nether Artifact");
+        netherArtifactMeta.setLocalizedName("survivalShowdown.netherArtifact");
+        netherArtifact.setItemMeta(netherArtifactMeta);
+
+        ShapedRecipe netherArtifactRecipe = new ShapedRecipe(new NamespacedKey(survivalShowdown, "netherArtifact"), netherArtifact);
+        netherArtifactRecipe.shape(
+                "GLG",
+                "GFG",
+                "GLG");
+
+        netherArtifactRecipe.setIngredient('F', Material.FIREWORK_ROCKET);
+        netherArtifactRecipe.setIngredient('G', Material.ORANGE_STAINED_GLASS);
+        netherArtifactRecipe.setIngredient('L', Material.LAVA_BUCKET);
+
+        Bukkit.addRecipe(netherArtifactRecipe);
 
     }
 }
