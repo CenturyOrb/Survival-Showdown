@@ -2,13 +2,17 @@ package com.rosed.survivalshowdown.manager;
 
 import com.rosed.survivalshowdown.SurvivalShowdown;
 import com.rosed.survivalshowdown.instance.Craftable;
+import jdk.internal.org.jline.utils.DiffHelper;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
@@ -23,6 +27,7 @@ import org.checkerframework.checker.units.qual.C;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 @Getter
 public class CraftManager {
@@ -574,12 +579,15 @@ public class CraftManager {
         deathsScytheMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Death's Scythe");
         deathsScytheMeta.setLocalizedName("survivalShowdown.deathsScythe");
         Damageable damageable = (Damageable) deathsScytheMeta;
-        damageable.setDamage(245);
+        damageable.setDamage(240);
         List<String> deathsScytheLore = new ArrayList<>();
         deathsScytheLore.add(ChatColor.GOLD + "On Hit:");
         deathsScytheLore.add(ChatColor.GREEN + "- Deal 20% of target current hp");
         deathsScytheLore.add(ChatColor.GREEN + "- Heal 25% of damage dealt");
         deathsScytheMeta.setLore(deathsScytheLore);
+        AttributeModifier damage = new AttributeModifier(UUID.randomUUID(), "generic.attackDamage", 0.0D, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HAND);
+        deathsScytheMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, damage);
+        deathsScytheMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         deathsScythe.setItemMeta(deathsScytheMeta);
 
         ShapedRecipe deathsScytheRecipe = new ShapedRecipe(new NamespacedKey(survivalShowdown, "deathsScythe"), deathsScythe);
