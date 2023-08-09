@@ -59,4 +59,10 @@ public abstract class ItemUtil {
         cooldowns.put(player, System.currentTimeMillis());
     }
 
+    protected boolean checkItemType(ItemStack item, String type)   {
+
+        return item.getType().toString().contains(type);
+
+    }
+
 }

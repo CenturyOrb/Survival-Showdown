@@ -1,6 +1,7 @@
 package com.rosed.survivalshowdown.listener.itemlistener;
 
 import com.rosed.survivalshowdown.util.ItemUtil;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -27,13 +28,14 @@ public class ExodusWear extends ItemUtil implements Listener {
 
         if (!(playerHitPlayerCheck(e.getEntity(), e.getDamager(), e.getCause())))   return;
         Player attacker = (Player) e.getDamager();
-        AtomicBoolean healingEffect = new AtomicBoolean(false);
-        attacker.getActivePotionEffects().forEach(potionEffect -> {
+        if (!checkItemType(attacker.getInventory().getItemInMainHand(), "SWORD"))   return;
+        boolean healingEffect = false;
+        for (PotionEffect potionEffect : attacker.getActivePotionEffects())   {
             if (potionEffect.getType() == PotionEffectType.REGENERATION)   {
-                healingEffect.set(true);
+                healingEffect = true;
             }
-        });
-        if (healingEffect.get()) return;
+        }
+        if (healingEffect) return;
         if (checkCooldown(attacker, exodusCooldownMap, exodusCooldown) &&
         itemCheck(attacker.getInventory().getHelmet(), "survivalShowdown.exodus"))   {
             attacker.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 50, 1, true, false, false));
