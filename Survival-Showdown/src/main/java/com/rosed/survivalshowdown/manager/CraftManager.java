@@ -44,6 +44,7 @@ public class CraftManager {
     private ItemStack anduril;
     private ItemStack apprenticeHelm;
     private ItemStack exodus;
+    private ItemStack tarnhelm;
 
     public CraftManager() {
 
@@ -65,6 +66,7 @@ public class CraftManager {
         setUpAnduril();
         setUpApprenticeHelm();
         setUpExodus();
+        setUpTarnhelm();
 
     }
 
@@ -129,6 +131,7 @@ public class CraftManager {
         craftables.add(new Craftable(1, anduril));
         craftables.add(new Craftable(1, apprenticeHelm));
         craftables.add(new Craftable(1, exodus));
+        craftables.add(new Craftable(1, tarnhelm));
 
         return craftables;
 
@@ -473,6 +476,31 @@ public class CraftManager {
         exodusRecipe.setIngredient('E', Material.EMERALD);
 
         Bukkit.addRecipe(exodusRecipe);
+
+    }
+
+    private void setUpTarnhelm()   {
+
+        tarnhelm = new ItemStack(Material.DIAMOND_HELMET);
+        ItemMeta tarnhelmMeta = tarnhelm.getItemMeta();
+        tarnhelmMeta.setDisplayName(ChatColor.GREEN + "Tarnhelm");
+        tarnhelmMeta.setLocalizedName("survivalShowdown.tarnhelm");
+        tarnhelmMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
+        tarnhelmMeta.addEnchant(Enchantment.PROTECTION_FIRE, 1, true);
+        tarnhelmMeta.addEnchant(Enchantment.WATER_WORKER, 3, true);
+        tarnhelm.setItemMeta(tarnhelmMeta);
+
+        ShapedRecipe tarnhelmRecipe = new ShapedRecipe(new NamespacedKey(survivalShowdown, "tarnhelm"), tarnhelm);
+        tarnhelmRecipe.shape(
+                "DID",
+                "DRD",
+                "   ");
+
+        tarnhelmRecipe.setIngredient('D', Material.DIAMOND);
+        tarnhelmRecipe.setIngredient('R', Material.REDSTONE_BLOCK);
+        tarnhelmRecipe.setIngredient('I', Material.IRON_INGOT);
+
+        Bukkit.addRecipe(tarnhelmRecipe);
 
     }
 }
