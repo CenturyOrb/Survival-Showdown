@@ -54,6 +54,7 @@ public class CraftManager {
     private ItemStack netherArtifact;
     private ItemStack hermesBoots;
     private ItemStack deathsScythe;
+    private ItemStack excalibur;
 
     public CraftManager() {
 
@@ -79,6 +80,7 @@ public class CraftManager {
         setUpNetherArtifact();
         setUpHermesBoots();
         setUpDeathsScythe();
+        setUpExcalibur();
 
     }
 
@@ -147,6 +149,7 @@ public class CraftManager {
         craftables.add(new Craftable(2, netherArtifact));
         craftables.add(new Craftable(1, hermesBoots));
         craftables.add(new Craftable(1, deathsScythe));
+        craftables.add(new Craftable(1, excalibur));
 
         return craftables;
 
@@ -417,7 +420,7 @@ public class CraftManager {
 
         anduril = new ItemStack(Material.IRON_SWORD);
         ItemMeta andurilMeta = avidity.getItemMeta();
-        andurilMeta.setDisplayName(ChatColor.GREEN + "Anduril");
+        andurilMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Anduril");
         andurilMeta.setLocalizedName("survivalShowdown.anduril");
         List<String> andurilLore = new ArrayList<>();
         andurilLore.add(ChatColor.GOLD + "While Holding:");
@@ -605,5 +608,34 @@ public class CraftManager {
 
     }
 
+    private void setUpExcalibur()   {
+
+        excalibur = new ItemStack(Material.DIAMOND_SWORD);
+        ItemMeta excaliburMeta = excalibur.getItemMeta();
+        excaliburMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Excalibur");
+        excaliburMeta.setLocalizedName("survivalShowdown.excalibur");
+        List<String> excaliburLore = new ArrayList<>();
+        excaliburLore.add("");
+        excaliburLore.add(ChatColor.GOLD + "On Hit:");
+        excaliburLore.add(ChatColor.GREEN + "- Explosion deals 2 hearts");
+        excaliburLore.add(ChatColor.GREEN + "- 5 second cooldown");
+        excaliburMeta.setLore(excaliburLore);
+        excaliburMeta.addEnchant(Enchantment.DURABILITY, 2, true);
+        excalibur.setItemMeta(excaliburMeta);
+
+        ShapedRecipe excaliburRecipe = new ShapedRecipe(new NamespacedKey(survivalShowdown, "excalibur"), excalibur);
+        excaliburRecipe.shape(
+                "SFS",
+                "STS",
+                "SDS");
+
+        excaliburRecipe.setIngredient('S', Material.SOUL_SAND);
+        excaliburRecipe.setIngredient('D', Material.DIAMOND_SWORD);
+        excaliburRecipe.setIngredient('T', Material.TNT);
+        excaliburRecipe.setIngredient('F', Material.FIRE_CHARGE);
+
+        Bukkit.addRecipe(excaliburRecipe);
+
+    }
 
 }
