@@ -32,7 +32,7 @@ public class ExcaliburHit extends ItemUtil implements Listener {
         if (!itemCheck(attacker.getInventory().getItemInMainHand(), "survivalShowdown.excalibur"))   return;
         if (checkCooldown(attacker, excaliburCooldownMap, 5000L))   {
             defender.setHealth(defender.getHealth() - 4.0);
-            Bukkit.getWorld(defender.getWorld().getName()).playSound(defender.getLocation(), Sound.ENTITY_LIGHTNING_BOLT_THUNDER, 1.0f, 1.0f);
+            Bukkit.getWorld(defender.getWorld().getName()).playSound(defender.getLocation(), Sound.ENTITY_LIGHTNING_BOLT_IMPACT, 1.0f, 1.0f);
             defender.getWorld().spawnParticle(Particle.LAVA, defender.getLocation().add(0, 1,0 ), 10, 0.3, 0.3, 0.3);
             setCooldown(attacker, excaliburCooldownMap);
         }

@@ -55,6 +55,7 @@ public class CraftManager {
     private ItemStack hermesBoots;
     private ItemStack deathsScythe;
     private ItemStack excalibur;
+    private ItemStack hideOfLeviathan;
 
     public CraftManager() {
 
@@ -81,6 +82,7 @@ public class CraftManager {
         setUpHermesBoots();
         setUpDeathsScythe();
         setUpExcalibur();
+        setUpHideofLeviathan();
 
     }
 
@@ -150,6 +152,7 @@ public class CraftManager {
         craftables.add(new Craftable(1, hermesBoots));
         craftables.add(new Craftable(1, deathsScythe));
         craftables.add(new Craftable(1, excalibur));
+        craftables.add(new Craftable(1, hideOfLeviathan));
 
         return craftables;
 
@@ -496,7 +499,6 @@ public class CraftManager {
         Bukkit.addRecipe(exodusRecipe);
 
     }
-
     private void setUpTarnhelm()   {
 
         tarnhelm = new ItemStack(Material.DIAMOND_HELMET);
@@ -522,6 +524,32 @@ public class CraftManager {
 
     }
 
+    private void setUpHideofLeviathan()   {
+
+        hideOfLeviathan = new ItemStack(Material.DIAMOND_LEGGINGS);
+        ItemMeta hideOfLeviathanMeta = hideOfLeviathan.getItemMeta();
+        hideOfLeviathanMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Hide of Leviathan");
+        hideOfLeviathanMeta.setLocalizedName("survivalShowdown.hideOfLeviathan");
+        hideOfLeviathanMeta.addEnchant(Enchantment.OXYGEN, 3, true);
+        hideOfLeviathanMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 4, true);
+        hideOfLeviathanMeta.addEnchant(Enchantment.WATER_WORKER, 1, true);
+        hideOfLeviathan.setItemMeta(hideOfLeviathanMeta);
+
+        ShapedRecipe hideOfLeviathanRecipe = new ShapedRecipe(new NamespacedKey(survivalShowdown, "hideOfLeviathan"), hideOfLeviathan);
+        hideOfLeviathanRecipe.shape(
+                "BWB",
+                "DAD",
+                "L L");
+
+        hideOfLeviathanRecipe.setIngredient('L', Material.LILY_PAD);
+        hideOfLeviathanRecipe.setIngredient('D', Material.DIAMOND);
+        hideOfLeviathanRecipe.setIngredient('A', Material.DIAMOND_LEGGINGS);
+        hideOfLeviathanRecipe.setIngredient('B', Material.LAPIS_BLOCK);
+        hideOfLeviathanRecipe.setIngredient('W', Material.WATER_BUCKET);
+
+        Bukkit.addRecipe(hideOfLeviathanRecipe);
+
+    }
     private void setUpNetherArtifact()   {
 
         netherArtifact = new ItemStack(Material.BLAZE_ROD);
