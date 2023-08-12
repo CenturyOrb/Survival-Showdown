@@ -4,10 +4,7 @@ import com.rosed.survivalshowdown.SurvivalShowdown;
 import com.rosed.survivalshowdown.instance.Craftable;
 import jdk.internal.org.jline.utils.DiffHelper;
 import lombok.Getter;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
+import org.bukkit.*;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.enchantments.Enchantment;
@@ -21,6 +18,8 @@ import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionData;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionType;
 import org.checkerframework.checker.units.qual.C;
 
@@ -56,6 +55,7 @@ public class CraftManager {
     private ItemStack deathsScythe;
     private ItemStack excalibur;
     private ItemStack hideOfLeviathan;
+    private ItemStack potionofVelocity;
 
     public CraftManager() {
 
@@ -83,6 +83,7 @@ public class CraftManager {
         setUpDeathsScythe();
         setUpExcalibur();
         setUpHideofLeviathan();
+        setUppotionofVelocity();
 
     }
 
@@ -153,6 +154,7 @@ public class CraftManager {
         craftables.add(new Craftable(1, deathsScythe));
         craftables.add(new Craftable(1, excalibur));
         craftables.add(new Craftable(1, hideOfLeviathan));
+        craftables.add(new Craftable(3, potionofVelocity));
 
         return craftables;
 
@@ -550,6 +552,7 @@ public class CraftManager {
         Bukkit.addRecipe(hideOfLeviathanRecipe);
 
     }
+
     private void setUpNetherArtifact()   {
 
         netherArtifact = new ItemStack(Material.BLAZE_ROD);
@@ -663,6 +666,31 @@ public class CraftManager {
         excaliburRecipe.setIngredient('F', Material.FIRE_CHARGE);
 
         Bukkit.addRecipe(excaliburRecipe);
+
+    }
+
+    private void setUppotionofVelocity()   {
+
+        potionofVelocity = new ItemStack(Material.POTION);
+        ItemMeta potionofVelocityMeta = potionofVelocity.getItemMeta();
+        PotionMeta pmeta = (PotionMeta) potionofVelocityMeta;
+        pmeta.setDisplayName(ChatColor.GOLD + "Potion of Velocity");
+        pmeta.setLocalizedName("survivalShowdown.potionofVelocity");
+        pmeta.addCustomEffect(new PotionEffect(PotionEffectType.SPEED, 700, 0), true);
+        pmeta.setColor(Color.AQUA);
+        potionofVelocity.setItemMeta(pmeta);
+
+        ShapedRecipe potionofVelocityRecipe = new ShapedRecipe(new NamespacedKey(survivalShowdown, "potionofVelocity"), potionofVelocity);
+        potionofVelocityRecipe.shape(
+                " C ",
+                " G ",
+                " S ");
+
+        potionofVelocityRecipe.setIngredient('C', Material.COCOA_BEANS);
+        potionofVelocityRecipe.setIngredient('G', Material.GLASS_BOTTLE);
+        potionofVelocityRecipe.setIngredient('S', Material.SUGAR);
+
+        Bukkit.addRecipe(potionofVelocityRecipe);
 
     }
 
