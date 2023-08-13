@@ -56,6 +56,7 @@ public class CraftManager {
     private ItemStack excalibur;
     private ItemStack hideOfLeviathan;
     private ItemStack potionofVelocity;
+    private ItemStack luckyShears;
 
     public CraftManager() {
 
@@ -84,6 +85,7 @@ public class CraftManager {
         setUpExcalibur();
         setUpHideofLeviathan();
         setUppotionofVelocity();
+        setUpLuckyShears();
 
     }
 
@@ -155,6 +157,7 @@ public class CraftManager {
         craftables.add(new Craftable(1, excalibur));
         craftables.add(new Craftable(1, hideOfLeviathan));
         craftables.add(new Craftable(3, potionofVelocity));
+        craftables.add(new Craftable(1, luckyShears));
 
         return craftables;
 
@@ -691,6 +694,33 @@ public class CraftManager {
         potionofVelocityRecipe.setIngredient('S', Material.SUGAR);
 
         Bukkit.addRecipe(potionofVelocityRecipe);
+
+    }
+
+    private void setUpLuckyShears()   {
+
+        luckyShears = new ItemStack(Material.SHEARS);
+        ItemMeta luckyShearsMeta = luckyShears.getItemMeta();
+        luckyShearsMeta.setDisplayName(ChatColor.GOLD + "Lucky Shears");
+        luckyShearsMeta.setLocalizedName("survivalShowdown.luckyShears");
+        List<String> luckyShearsLore = new ArrayList<>();
+        luckyShearsLore.add(ChatColor.GOLD + "On break:");
+        luckyShearsLore.add(ChatColor.GREEN + "- 10% Apple drop rate");
+        luckyShearsMeta.setLore(luckyShearsLore);
+        luckyShearsMeta.addEnchant(Enchantment.ARROW_INFINITE, 1, true);
+        luckyShearsMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        luckyShears.setItemMeta(luckyShearsMeta);
+
+        ShapedRecipe luckyShearsRecipe = new ShapedRecipe(new NamespacedKey(survivalShowdown, "luckyShears"), luckyShears);
+        luckyShearsRecipe.shape(
+                " G ",
+                " S ",
+                "   ");
+
+        luckyShearsRecipe.setIngredient('S', Material.SHEARS);
+        luckyShearsRecipe.setIngredient('G', Material.GOLD_INGOT);
+
+        Bukkit.addRecipe(luckyShearsRecipe);
 
     }
 
