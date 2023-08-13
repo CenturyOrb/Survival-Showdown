@@ -80,6 +80,7 @@ public enum InstanceManager {
         Bukkit.getPluginManager().registerEvents(new DeathsScytheHit(), survivalShowdown);
         Bukkit.getPluginManager().registerEvents(new ExodusWear(), survivalShowdown);
         Bukkit.getPluginManager().registerEvents(new ExcaliburHit(), survivalShowdown);
+        Bukkit.getPluginManager().registerEvents(new LuckyShearsBreak(), survivalShowdown);
         new FutureHit();
         new HermesBootsWear();
         new AndurilHold();
