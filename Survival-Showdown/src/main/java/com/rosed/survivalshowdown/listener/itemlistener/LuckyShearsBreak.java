@@ -14,8 +14,7 @@ public class LuckyShearsBreak extends ItemUtil implements Listener {
 
     @EventHandler
     public void onLuckyShears(BlockBreakEvent e)   {
-
-        Bukkit.broadcastMessage(e.getBlock().getType().toString());
+        
         if (!e.getBlock().getType().toString().contains("LEAVES"))   return;
         Player player = e.getPlayer();
         Block block = e.getBlock();
